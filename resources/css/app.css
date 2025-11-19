@@ -1,11 +1,87 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+* {
+    padding: 0;
+    margin: 0;
 }
+
+#homecontent {
+    border: 1px solid red;
+}
+
+/* navbar */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    height: 8vh;
+    align-items: center;
+    background-color: #22222c;
+}
+
+nav a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+#search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    height: 35px;
+    width: 30%;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    
+}
+
+#search .search-btn {
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+    font-size: 18px;
+    background-color: transparent;
+}
+
+#search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+
+}
+
+#navbar-logo {
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    
+}
+
+#nav-list {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+}
+
+#nav-list li:nth-child(3) {
+    margin-right: 4vh;
+}
+
+#nav-list li {
+    letter-spacing: 1px;
+    margin-left: 25px;
+}
+
+/* fim navbar */

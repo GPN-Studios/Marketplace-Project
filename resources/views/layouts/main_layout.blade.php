@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title> 
-    @vite('resources/css/app.css')    <!--  css  -->
-    @vite('resources/js/app.js')      <!--  importação de bibliotecas, js externo e frameworks front end  -->
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 
 
 </head>
 <body>
-@include('layouts.top_bar')
+@include('layouts.navbar')
 
 @yield('content')
 

@@ -1,6 +1,6 @@
 <header>  
     <nav>
-        <a id="navbar-logo" href={{ route('home') }}>Laravel Projeto</a>
+        <a id="navbar-logo" href=>Laravel Projeto</a>
         <div id="search">
             <input type="text" name="" id="" placeholder="Pesquisar...">
             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>

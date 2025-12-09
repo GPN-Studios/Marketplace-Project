@@ -8,9 +8,20 @@ use Illuminate\View\View;
 class MainController extends Controller
 {
     
-    public function viewTest(): view 
+    public function home(): view 
     {
-        return view('layouts.main_layout');
+        return view('home');
     }
+
+    public function login(): view
+    {
+        return view('login');
+    }
+
+    public function signup(): view
+    {
+        return view('signup');
+    }
+
 
 }

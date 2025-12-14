@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+* {
+    font-family: "Google Sans", sans-serif;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    border: 1px solid rgb(255, 0, 0);
+    background-color: rgb(117, 113, 113);
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    border: 1px solid red;
+    display: block;
+    background-color: rgb(75, 116, 204);
+    display: flex;
+    flex-direction: column;
+
+}
+
+input {
+    border: 1px solid red;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+

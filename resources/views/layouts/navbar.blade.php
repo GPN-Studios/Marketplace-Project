@@ -8,7 +8,7 @@
         <ul id="nav-list">
             <li><a href="">Sobre</a></li>
             <li><a href="">Projeto</a></li>
-            <li><a href="">Login</a></li>
+            <li><a href="{{'/login'}}">Login</a></li>
         </ul>
     </nav>
 </header>

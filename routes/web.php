@@ -7,12 +7,9 @@ use Illuminate\View\View;
 //rotas que necessitam de autenticação
 Route::middleware([('auth')])->group(function() {
 
-
+Route::get('/',[MainController::class, 'home'])->name('home');
 
 });
-
-
-Route::get('/',[MainController::class, 'home'])->name('home');
 
 Route::get('/login',[MainController::class, 'login'])->name('login');
 

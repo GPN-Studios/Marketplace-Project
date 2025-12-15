@@ -5,6 +5,9 @@
 @section('content')
 @include('layouts.navbar')
 
+@auth
+<p>  {{Auth::user()->name;}}  </p>
+@endauth
 
 <!-- HTML AQUI  -->
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\OrderItem;
+use App\Models\OrderAdress;
 
 
 class Order extends Model
@@ -24,5 +25,9 @@ class Order extends Model
 
     public function orderItem() {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function orderAdress() {
+        return $this->hasOne(orderAdress::class);
     }
 }

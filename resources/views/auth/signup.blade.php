@@ -1,54 +1,34 @@
 @extends('layouts.main_layout')
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/signup.css') }}">    <!-- public/css/home.css -->
+    <link rel="stylesheet" href="{{ asset('css/signup.css') }}"> <!-- public/css/home.css -->
 @endsection
 
 @section('content')
-<!-- HTML AQUI  -->
 
-<h1>Marketplaceholdertitle</h1>
-
-<div class="login-form">
-    <form action="{{route('register')}}" method="POST">
-        @csrf
-
-        <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="{{ old('email') }}">
+<div class="caixa-login">
+    <h2>Criar Conta</h2>
+    <form>
+        <div class="caixa-usuario">
+            <label>Usuário</label>
+            <input type="text" name="username" required>
         </div>
-
-        <div>
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="name" value="{{ old('name') }}">
+        <div class="caixa-usuario">
+            <label>Email</label>
+            <input type="email" name="email" required>
         </div>
-
-        <div>
-        <label for="password">Senha</label>
-        <input type="password" name="password" id="password">
+        <div class="caixa-usuario">
+            <label>Senha</label>
+            <input type="password" name="password" required>
         </div>
-
-        <div>
-        <label for="password">Confirme a senha</label>
-        <input type="password" name="password_confirmation" id="password">
-        </div>  
-
-        <div>
-        <button type="submit">Enviar</button>
+        <div class="caixa-usuario">
+            <label>Confirmar Senha</label>
+            <input type="password" name="confirm_password" required>
         </div>
-
-
-        @if($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        
+        <button class="butao">
+            Cadastrar
+        </button>
     </form>
 </div>
 
-
+>>>>>>> frontend-structure
 @endsection

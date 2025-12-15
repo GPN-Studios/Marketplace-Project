@@ -9,6 +9,7 @@ Route::middleware([('auth')])->group(function() {
 
     Route::get('/',[MainController::class, 'home'])->name('home');
 
+
 });
 
 //rotas que usuários não logados poderão acessar mas usuários logados não

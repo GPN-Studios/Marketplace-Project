@@ -1,49 +1,62 @@
 @extends('layouts.main_layout')
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">    <!-- public/css/home.css -->
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}"> <!-- public/css/home.css -->
 @endsection
 
 @section('content')
-<!-- HTML AQUI  -->
 
+    <div class="caixa-login">
+        <h2>Entrar</h2>
+        <form>
+            <div class="caixa-usuario">
+                <label>Usuário</label>
+                <input type="text" required>
+            </div>
 
+            <div class="caixa-usuario">
+                <label>Senha</label>
+                <input type="password" required>
+            </div>
 
-<div class="form-container">
-    <div class="login-title">
-        <h1>Login</h1>
+            <button class="butao">
+                entrar
+            </button>
+            <div class="divisor">
+                <span>ou</span>
+            </div>
+            <button class="butao2">
+                cadastrar
+            </button>
+            <button class="butao2">
+                Esqueceu a senha?
+            </button>
+        </form>
+
     </div>
 
-    <form action="{{route('login')}}" method="POST">
-        @csrf
 
-        <div class="input-container">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="{{ old('email') }}">
-        </div>
 
-        <div class="input-container">
-        <label for="password">Senha</label>
-        <input type="password" name="password" id="password">
-        </div>
 
-        <div class="submit-btn">
-        <button type="submit" >Enviar</button>
-        </div>
 
+
+
+
+
+
+
+
+
+
+    @if($errors->any())
         <div>
-        <a href="{{'register'}}">Não possui uma conta?</a>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
         </div>
+    @endif
 
-        @if($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        
-    </form>
-</div>
+
+>>>>>>> frontend-structure
 @endsection

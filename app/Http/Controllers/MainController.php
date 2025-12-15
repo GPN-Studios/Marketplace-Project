@@ -15,12 +15,12 @@ class MainController extends Controller
 
     public function login(): view
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function signup(): view
     {
-        return view('signup');
+        return view('auth.signup');
     }
 
 

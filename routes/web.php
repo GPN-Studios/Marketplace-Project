@@ -8,4 +8,4 @@ Route::get('/',[MainController::class, 'home'])->name('home');
 
 Route::get('/login',[MainController::class, 'login'])->name('login');
 
-Route::get('/signup',[MainController::class, 'login'])->name('signup');
+Route::get('/signup',[MainController::class, 'signup'])->name('signup');

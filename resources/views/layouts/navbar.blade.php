@@ -9,7 +9,7 @@
         <ul id="nav-list">
         @auth
             <!-- usuário logado -->
-            <li><a href="">{{Auth::user()->name}}</a></li>
+            <li><a href="{{route('profile')}}">{{Auth::user()->name}}</a></li>
             <li><a href="">Carrinho</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" id="logoutform">

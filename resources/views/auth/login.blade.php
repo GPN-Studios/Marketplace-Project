@@ -4,59 +4,46 @@
 @endsection
 
 @section('content')
+@include('layouts.navbar')
 
-    <div class="caixa-login">
-        <h2>Entrar</h2>
-        <form>
-            <div class="caixa-usuario">
-                <label>Usuário</label>
-                <input type="text" required>
+    <div class="login-box">
+    <h2>Login</h2>
+        <form method="POST" action="{{route('login')}}">
+            @csrf
+
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="text" name="email" id="email" value="{{ old("email") }}">
+                @error('email')
+                    <small class="error-message">{{ $message }}</small>
+                @enderror
             </div>
 
-            <div class="caixa-usuario">
+            <div class="input-group">
                 <label>Senha</label>
-                <input type="password" required>
+                <input type="password" name="password" id="password">
+                @error('password')
+                    <small class="error-message">{{ $message }}</small>
+                @enderror
+                
             </div>
 
-            <button class="butao">
-                entrar
+            <button class="btn-primary" type="submit">
+                Entrar
             </button>
-            <div class="divisor">
+
+            <div class="divider">
                 <span>ou</span>
             </div>
-            <button class="butao2">
-                cadastrar
-            </button>
-            <button class="butao2">
-                Esqueceu a senha?
-            </button>
-        </form>
 
+            <a href="{{ route('signup') }}" class="btn-secondary">
+                Cadastrar
+            </a>
+
+            <a href="#" class="btn-secondary">
+                Esqueceu a senha?
+            </a>
+        </form>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @if($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-
->>>>>>> frontend-structure
 @endsection

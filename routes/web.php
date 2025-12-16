@@ -8,6 +8,8 @@ use Illuminate\View\View;
 Route::middleware([('auth')])->group(function() {
 
     Route::get('/',[MainController::class, 'home'])->name('home');
+    Route::get('/profile',[MainController::class, 'profile'])->name('profile');
+
 
 
 });

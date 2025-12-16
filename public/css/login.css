@@ -7,7 +7,8 @@ body {
     background-color: #f0f0f0;
 }
 
-.caixa-login {
+/* Login container */
+.login-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,98 +21,99 @@ body {
     border-radius: 10px;
 }
 
-.caixa-login h2 {
+.login-box h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #292929;
     text-align: center;
 }
 
-.caixa-login .caixa-usuario {
+/* Input group */
+.login-box .input-group {
     margin-bottom: 20px;
 }
 
-.caixa-login .caixa-usuario label {
-    
+.login-box .input-group label {
     margin-bottom: 8px;
     font-size: 14px;
     color: #292929;
 }
 
-.caixa-login .caixa-usuario input {
+.login-box .input-group input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    color: #292929;
+    color: #000000;
+    font: bolder;
     border: 1px solid #292929;
     border-radius: 5px;
     outline: none;
     background: transparent;
 }
 
-
-.caixa-login form a {
+/* Links inside form */
+.login-box form a {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
-    color: #03e9f4;
+    color: #000000;
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
-    margin-top: 40px;
     letter-spacing: 4px;
 }
 
-.caixa-login .butao {
+/* Primary button */
+.login-box .btn-primary {
     width: 100%;
     padding: 12px;
     margin-top: 30px;
     background-color: #008080;
     border: 1px solid #008080;
     border-radius: 50px;
-    color: #292929;
+    color: #ffffff;
+    font: bold;
     font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
 }
 
-
-
-.divisor {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 20px 0;
-  color: #555;
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #555;
 }
 
-.divisor::before,
-.divisor::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #aaa;
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #aaa;
 }
 
-.divisor span {
-  padding: 0 10px;
-  font-size: 14px;
+.divider span {
+    padding: 0 10px;
+    font-size: 14px;
 }
 
-.caixa-login .butao2 {
+/* Secondary button */
+.login-box .btn-secondary {
     width: 100%;
     padding: 12px;
     margin-top: 20px;
-    background-color: #B3FF80;
+    background-color: #65df15;
     border: 1px solid #B3FF80;
     border-radius: 50px;
-    color: #292929;
+    color: #ffffff;
     font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
+    text-align: center;
 }
-

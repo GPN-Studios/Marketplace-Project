@@ -23,5 +23,15 @@ class MainController extends Controller
         return view('auth.signup');
     }
 
+    public function dashboard(): view
+    {
+        return view('dashboard');
+    }
+
+    public function profile(): view
+    {
+        return view('profile');
+    }
+
 
 }

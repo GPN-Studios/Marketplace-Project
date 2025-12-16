@@ -7,7 +7,7 @@ body {
     background-color: #f0f0f0;
 }
 
-.caixa-login {
+.login-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,25 +20,24 @@ body {
     border-radius: 10px;
 }
 
-.caixa-login h2 {
+.login-box h2 {
     margin: 0 0 30px;
     padding: 0;
     color: #292929;
     text-align: center;
 }
 
-.caixa-login .caixa-usuario {
+.login-box .input-group {
     margin-bottom: 20px;
 }
 
-.caixa-login .caixa-usuario label {
-    
+.login-box .input-group label {
     margin-bottom: 8px;
     font-size: 14px;
     color: #292929;
 }
 
-.caixa-login .caixa-usuario input {
+.login-box .input-group input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -49,8 +48,7 @@ body {
     background: transparent;
 }
 
-
-.caixa-login form a {
+.login-box form a {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -64,7 +62,7 @@ body {
     letter-spacing: 4px;
 }
 
-.caixa-login .butao {
+.login-box .btn-primary {
     width: 100%;
     padding: 12px;
     margin-top: 30px;
@@ -78,30 +76,28 @@ body {
     cursor: pointer;
 }
 
-
-
-.divisor {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 20px 0;
-  color: #555;
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #555;
 }
 
-.divisor::before,
-.divisor::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #aaa;
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #aaa;
 }
 
-.divisor span {
-  padding: 0 10px;
-  font-size: 14px;
+.divider span {
+    padding: 0 10px;
+    font-size: 14px;
 }
 
-.caixa-login .butao2 {
+.login-box .btn-secondary {
     width: 100%;
     padding: 12px;
     margin-top: 20px;
@@ -114,4 +110,3 @@ body {
     text-transform: uppercase;
     cursor: pointer;
 }
-

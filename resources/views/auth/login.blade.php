@@ -4,10 +4,10 @@
 @endsection
 
 @section('content')
-@include('layouts.navbar')
+    @include('layouts.navbar')
 
     <div class="login-box">
-    <h2>Login</h2>
+        <h2>Login</h2>
         <form method="POST" action="{{route('login')}}">
             @csrf
 
@@ -25,7 +25,7 @@
                 @error('password')
                     <small class="error-message">{{ $message }}</small>
                 @enderror
-                
+
             </div>
 
             <button class="btn-primary" type="submit">

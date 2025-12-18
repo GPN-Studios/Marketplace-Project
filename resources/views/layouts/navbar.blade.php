@@ -10,11 +10,11 @@
         @auth
             <!-- usuário logado -->
             <li><a href="{{route('profile')}}">{{Auth::user()->name}}</a></li>
-            <li><a href="">Carrinho</a></li>
+            <li><a href="" class="button-Logout">Carrinho</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" id="logoutform">
                 @csrf
-                <button type="submit" >Logout</button>
+                <button type="submit" class="button-Logout" >Logout</button>
                 </form>
                 
             </li>

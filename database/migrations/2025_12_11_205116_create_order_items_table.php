@@ -22,6 +22,10 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
 
+            $table->foreignId('seller_id')
+                ->constrained('users')
+                ->onDelete('cascade');   // user_id do dono do produto
+                
             $table->integer('quantity')->default(1);
             $table->decimal('price', 10, 2); // preço no momento da compra
             $table->decimal('subtotal', 10, 2); // quantidade * preço de um produto específico

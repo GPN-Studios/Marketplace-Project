@@ -50,14 +50,20 @@ class User extends Authenticatable
 
     // Relations
 
-    public function products() {
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 
+    public function cart()
+    {
+    return $this->hasOne(Order::class)->where('status', 'cart');
+    }
 
 
 

@@ -1,24 +1,47 @@
 <?php
 
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
-//rotas que necessitam de autenticação
-Route::middleware([('auth')])->group(function() {
+//user-related routes
+Route::middleware('auth')->group(function() {
 
-    Route::get('/',[MainController::class, 'home'])->name('home');
-    Route::get('/profile',[MainController::class, 'profile'])->name('profile');
+    Route::get('/profile',[UserController::class, 'profile'])->name('profile');
+});
+
+
+    
+//products
+Route::middleware('auth')->prefix('products')->group(function() {
+
+    Route::get('create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('store', [ProductController::class, 'store'])->name('products.store');
+    Route::get('show/{id}' , [ProductController::class, 'show' ])->name('products.show');
 
 
 
 });
 
+//cart routes
+Route::middleware('auth')->prefix('cart')->group(function() {
+    
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+
+});
+
+// dashboard
+Route::get('/',[DashboardController::class, 'home'])->name('home');
+
+
 //rotas que usuários não logados poderão acessar mas usuários logados não
-Route::middleware([('guest')])->group(function() {
+Route::middleware('guest')->group(function() {
 
-    Route::get('/login',[MainController::class, 'login'])->name('login');
+    Route::view('/login', 'auth.login')->name('login');
 
-    Route::get('/signup',[MainController::class, 'signup'])->name('signup');
+    Route::view('/signup', 'auth.signup')->name('signup');
 
 });

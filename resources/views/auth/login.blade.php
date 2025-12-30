@@ -1,10 +1,9 @@
-@extends('layouts.main_layout')
+@extends('layouts.guest_layout')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}"> <!-- public/css/home.css -->
 @endsection
 
 @section('content')
-@include('layouts.navbar')
 
     <div class="login-box">
     <h2>Login</h2>
@@ -14,17 +13,21 @@
             <div class="input-group">
                 <label>E-mail</label>
                 <input type="text" name="email" id="email" value="{{ old("email") }}">
-                @error('email')
-                    <small class="error-message">{{ $message }}</small>
-                @enderror
+                <div class="error-box">
+                    @error('email')
+                        <small class="error-message text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
             </div>
 
             <div class="input-group">
                 <label>Senha</label>
                 <input type="password" name="password" id="password">
-                @error('password')
-                    <small class="error-message">{{ $message }}</small>
-                @enderror
+                <div class="error-box">
+                    @error('password')
+                        <small class="error-message text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
                 
             </div>
 

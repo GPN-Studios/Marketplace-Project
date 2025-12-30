@@ -117,3 +117,9 @@ body {
     cursor: pointer;
     text-align: center;
 }
+
+/* error boxes */
+.error-box {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+}

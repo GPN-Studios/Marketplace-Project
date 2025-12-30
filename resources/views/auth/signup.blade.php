@@ -1,10 +1,9 @@
-@extends('layouts.main_layout')
+@extends('layouts.guest_layout')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/signup.css') }}"> <!-- public/css/home.css -->
 @endsection
 
 @section('content')
-@include('layouts.navbar')
 
 <div class="login-box">
     <h2>Create Account</h2>
@@ -12,41 +11,48 @@
     <form action="{{'/register'}}" method="POST">
         @csrf
         <div class="input-group">
-            <label>Usuário</label>
+            <label for="name">Usuário</label>
             <input type="text" name="name" id="name" value="{{old('name')}}">
+            <div class="error-box d-block">
             @error('name')
-                <small class="error-message">{{ $message }}</small>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
+            </div>
         </div>
 
         <div class="input-group">
-            <label>Email</label>
+            <label for="email">Email</label>
             <input type="email" name="email" id="email" value="{{old('email')}}">
-            @error('email')
-                <small class="error-message">{{ $message }}</small>
-            @enderror
+            <div class="error-box d-block">
+                @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
 
         <div class="input-group">
-            <label>Senha</label>
+            <label for="password">Senha</label>
             <input type="password" name="password" id="password">
-            @error('password')
-                <small class="error-message">{{ $message }}</small>
-            @enderror
+            <div class="error-box d-block">
+                @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
 
         </div>
 
         <div class="input-group">
-            <label>Confirmar Senha</label>
+            <label for="password_confirmation">Confirmar Senha</label>
             <input type="password" name="password_confirmation" id="password_confirmation">
-            @error('password_confirmation')
-                <small class="error-message">{{ $message }}</small>
-            @enderror
         </div>
 
         <button class="btn-primary" type="submit">
             Cadastrar
-        </button>                                                   
+        </button>
+
+        <div class="d-flex justify-content-center align-items-center mt-3">
+        <a href="{{ route('login' )}}" class="">Já possui uma conta?</a>  
+        </div>                                                 
 
     </form>
 </div>

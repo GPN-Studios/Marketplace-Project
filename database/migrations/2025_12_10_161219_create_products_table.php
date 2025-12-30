@@ -18,6 +18,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name' , 100);
+            $table->string('image')->nullable();
             $table->text('description')->nullable();
 
             $table->decimal('price', 10, 2);

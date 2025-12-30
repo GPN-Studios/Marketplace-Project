@@ -15,12 +15,7 @@
 
 </head>
 <body>
-<x-navbar />  <!-- navbar component -->
-
-<main class="container mt-5 pt-4">
-
 @yield('content')
-</main>
 
 
 <!-- bootstrap -->

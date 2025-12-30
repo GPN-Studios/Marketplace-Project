@@ -70,9 +70,10 @@ nav a:hover {
     display: flex;
     list-style: none;
     justify-content: space-between;
+    align-items: center;
 }
 
-#nav-list li:nth-child(3) {
+#nav-list li:last-child {
     margin-right: 4vh;
 }
 
@@ -81,4 +82,9 @@ nav a:hover {
     margin-left: 25px;
 }
 
+#logout-btn {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transition: 0.3s;
+}
 /* fim navbar */

@@ -48,20 +48,6 @@ body {
     background: transparent;
 }
 
-.login-box form a {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #03e9f4;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 4px;
-}
-
 .login-box .btn-primary {
     width: 100%;
     padding: 12px;
@@ -109,4 +95,9 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.error-box {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
 }

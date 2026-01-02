@@ -11,9 +11,9 @@
         <ul id="nav-list">
         @auth
             <!-- usuário logado -->
-            <li><a href="{{route('profile')}}">{{Auth::user()->name}}</a></li>
-            <li><a href="{{route('products.create')}}">Anunciar</a></li>
-            <li><a href="">Carrinho</a></li>
+            <li><a href="{{ route('profile') }}">{{Auth::user()->name}}</a></li>
+            <li><a href="{{ route('products.create') }}">Anunciar</a></li>
+            <li><a href="{{ route('cart.index') }}">Carrinho</a></li>
             <li>
             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                 @csrf

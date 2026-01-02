@@ -19,7 +19,10 @@
             <h5>Estoque: {{ $product->stock }}</h5>
         </div>
         <div class="col-6">
-            <form class="d-flex align-items-center" action="" method="POST">
+            <form class="d-flex align-items-center" action="{{route('cart.add', encrypt($product->id)) }}" method="POST">
+                @csrf
+                <input type="hidden" value="">
+
                 <span class="fw-bold fs-5 text-nowrap me-4">
                     R$ {{ $product->price }}
                 </span>

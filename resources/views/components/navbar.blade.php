@@ -29,7 +29,7 @@
             <ul class="navbar-nav ms-auto align-items-center gap-2">
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="#">
+                    <a class="nav-link d-flex align-items-center" href="{{route('cart.index')}}">
                         <img src="{{ asset('imgs/cart-icon.png') }}" class="cart-icon me-1" alt="Carrinho">
                     </a>
                 </li>
@@ -57,7 +57,6 @@
                 <li class="nav-item"><a class="nav-link px-3" href="#">Projeto</a></li>
                 <li class="nav-item"><a class="nav-link px-3" href="/login">Login</a></li>
                 @endauth
-
             </ul>
         </div>
     </div>

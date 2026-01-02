@@ -1,35 +1,64 @@
-<header>  
-    <nav>
-        <a id="navbar-logo" href="{{route('home')}}">Laravel Projeto</a>
-        <div id="search">
-            <form action="" class="d-flex align-items-center w-100">
-            <input type="text" name="" id="" placeholder="Pesquisar...">
-            <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+    <div class="container-fluid">
 
-        <ul id="nav-list">
-        @auth
-            <!-- usuário logado -->
-            <li><a href="{{route('profile')}}">{{Auth::user()->name}}</a></li>
-            <li><a href="{{route('products.create')}}">Anunciar</a></li>
-            <li><a href="">Carrinho</a></li>
-            <li>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="btn p-0 text-white logout-btn">
-                    Logout
-                </button>
-            </form>
-            </li>
-            @else
-            <!-- usuário que não está logado -->
-            <li><a href="">Sobre</a></li>
-            <li><a href="">Projeto</a></li>
-            <li><a href="{{'/login'}}">Login</a></li>
-            @endauth
+        {{-- Logo --}}
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+            <img 
+                src="{{ asset('imgs/logo-verde-azulado.png') }}"
+                alt="Ideal Marketplace"
+                class="navbar-logo"
+            >
+        </a>
+
+        {{-- BUSCA (CENTRO REAL) --}}
+        <form class="d-flex custom-search" role="search">
+            <input class="form-control custom-search-input" type="search" placeholder="Pesquisar...">
+            <button class="btn search-btn" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+
+        {{-- Botão mobile --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {{-- Links --}}
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="#">
+                        <img src="{{ asset('imgs/cart-icon.png') }}" class="cart-icon me-1" alt="Carrinho">
+                    </a>
+                </li>
+
+                @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3" data-bs-toggle="dropdown" href="#">
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('products.create') }}">Anunciar produto</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="dropdown-item text-danger">Sair da conta</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                @else
+                <li class="nav-item"><a class="nav-link px-3" href="#">Sobre</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#">Projeto</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="/login">Login</a></li>
+                @endauth
+
             </ul>
-
-    </nav>
-    
-</header>
+        </div>
+    </div>
+</nav>

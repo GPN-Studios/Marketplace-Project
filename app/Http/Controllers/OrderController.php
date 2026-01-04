@@ -51,7 +51,7 @@ class OrderController extends Controller
             );
         }
 
-        return redirect()->route('cart.index')->with('success', 'Adicionado ao carrinho com sucesso.');
+    return redirect()->back() ->with('success', 'Adicionado ao carrinho');
     }
 
     public function update(Request $request, OrderItem $item) : RedirectResponse

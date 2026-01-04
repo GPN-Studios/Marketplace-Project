@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function() {
 });
 
 
-    
+
 //products
 Route::middleware('auth')->prefix('products')->group(function() {
 
@@ -28,7 +28,7 @@ Route::middleware('auth')->prefix('products')->group(function() {
 
 //cart routes
 Route::middleware('auth')->prefix('cart')->group(function() {
-    
+
     Route::get('/', [OrderController::class, 'index'])->name('cart.index');
 
     Route::post('/add/{product}', [OrderController::class, 'add'])->name('cart.add');

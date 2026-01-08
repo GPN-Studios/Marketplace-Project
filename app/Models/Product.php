@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\OrderItem;
+use Spatie\Tags\HasTags;
 
 class Product extends Model
 {
+    use HasTags;
 
     protected $fillable = [
         'user_id',

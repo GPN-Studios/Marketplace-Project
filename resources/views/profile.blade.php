@@ -30,7 +30,7 @@
                 {{-- PROTÓTIPO: sem ação --}}
                 <label class="change-photo">
                     Alterar foto
-                    <input type="file" hidden>
+                    <input type="file" name="profile_picture" hidden>
                 </label>
 
             </div>

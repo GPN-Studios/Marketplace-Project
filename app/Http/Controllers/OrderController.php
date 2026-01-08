@@ -65,27 +65,25 @@ class OrderController extends Controller
         if($request->action == 'increase') {
 
             if($item->quantity + 1 > $product->stock) {
-                return back()->withErrors('Estoque Insuficiente'); 
+                return back()->withErrors('Estoque Insuficiente.'); 
             }
 
             $item->increment('quantity');
-
-            return redirect()->route('cart.index')->with('success', 'Produto atualizado com suscesso.');
         }
 
         if($request->action == 'decrease') {
 
             if($item->quantity - 1 == 0) {
-                return back()->withErrors('Não é possivel reduzir a quantia para menos que 1');
+                return back()->withErrors('Não é possivel reduzir a quantia para menos que 1.');
             }
 
             $item->decrement('quantity');
-
-            return redirect()->route('cart.index')->with('success', 'Produto atualizado com suscesso.');
         }
 
+        $subtotalValue = $item->price * $item->quantity;
+
         $item->update([
-            'subtotal' => $item->price * $item->quantity 
+            'subtotal' => $subtotalValue
         ]);
 
         return redirect()->route('cart.index')->with('success', 'Produto atualizado com suscesso.');

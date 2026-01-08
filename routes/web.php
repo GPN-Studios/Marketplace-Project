@@ -12,6 +12,11 @@ use Illuminate\View\View;
 Route::middleware('auth')->group(function() {
 
     Route::get('/profile',[UserController::class, 'profile'])->name('profile');
+    //
+
+    Route::patch('/update',[UserController::class, 'update'])->name('user.update');
+
+
 });
 
 

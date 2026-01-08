@@ -8,9 +8,25 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile(): view
+    public function profile(): View
     {
         return view('profile');
     }
     
+    public function update(Request $request): RedirectResponse
+    {
+        $request->validate([
+            
+        ])
+
+        return redirect()->route('profile');
+    }
+
+
+
+
+
+
+
+
 }

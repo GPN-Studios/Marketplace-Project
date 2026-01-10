@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -62,7 +63,7 @@ class User extends Authenticatable
 
     public function cart()
     {
-    return $this->hasOne(Order::class)->where('status', 'cart');
+        return $this->hasOne(Order::class)->where('status', 'cart');
     }
 
 

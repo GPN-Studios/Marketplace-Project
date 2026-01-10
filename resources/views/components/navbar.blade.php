@@ -41,7 +41,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('profile') }}">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile', Auth::id() ) }}">Perfil</a></li>
                         <li><a class="dropdown-item" href="{{ route('products.create') }}">Anunciar produto</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>

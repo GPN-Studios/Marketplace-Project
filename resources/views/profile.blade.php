@@ -6,33 +6,37 @@
 
 @section('content')
 
-@auth
-<p> PERFIL DE {{ Auth::user()->name }} </p>
-@endauth
-
 <div class="container profile-page">
-
     <div class="row g-4">
-
         {{-- PERFIL --}}
         <div class="col-lg-4">
             <div class="profile-card">
 
                 <div class="profile-avatar">
                     <img
-                        src="https://via.placeholder.com/300"
-                        alt="Foto de perfil">
+                        @if ($user->profile_picture)
+                            src="{{ asset('storage/' . $user->profile_picture) }}"
+                        @else
+                            src="https://via.placeholder.com/300"
+                            alt="Foto de perfil">
+                        @endif
+                        >
                 </div>
 
-                <h3>Nome do Usuário</h3>
-                <p>email@exemplo.com</p>
+                <h3>{{$user->name}}</h3>
 
                 {{-- PROTÓTIPO: sem ação --}}
-                <label class="change-photo">
-                    Alterar foto
-                    <input type="file" name="profile_picture" hidden>
-                </label>
+                <form action="{{ route('user.pfp.update', $user) }}"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
 
+                    <label class="change-photo">
+                        Alterar foto
+                        <input type="file" name="profile_picture" hidden onchange="this.form.submit()">
+                    </label>
+                </form>
             </div>
         </div>
 

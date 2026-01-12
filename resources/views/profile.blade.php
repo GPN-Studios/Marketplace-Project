@@ -43,27 +43,33 @@
         {{-- DADOS --}}
         <div class="col-lg-8">
             <div class="profile-box">
-                <h4>Meus dados</h4>
+                <h4>Alterar dados</h4>
 
-                {{-- PROTÓTIPO: sem action --}}
-                <form>
+                <form action="{{ route('user.update', $user) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
 
                     <div class="mb-3">
-                        <label>Nome</label>
-                        <input type="text" placeholder="Nome do usuário">
+                        <label>Usuário</label>
+                        <input type="text" name="name" placeholder="{{ $user->name }}">
                     </div>
 
                     <div class="mb-3">
                         <label>Email</label>
-                        <input type="email" placeholder="email@exemplo.com">
+                        <input type="email" placeholder="{{ $user->email }}" disabled>
                     </div>
 
                     <div class="mb-3">
                         <label>Nova senha</label>
-                        <input type="password" placeholder="********">
+                        <input type="password" name="password" placeholder="********">
                     </div>
 
-                    <button type="button" class="btn-save">
+                    <div class="mb-3">
+                        <label>Nova senha</label>
+                        <input type="password" name="password_confirmation" placeholder="Digite a nova senha novamente.">
+                    </div>
+
+                    <button type="submit"    class="btn-save">
                         Salvar alterações
                     </button>
 
@@ -79,32 +85,18 @@
 
         <div class="row g-3">
 
-            {{-- CARD 1 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Produto anunciado</h5>
-                    <span>R$ 199,90</span>
+            {{-- CARD --}}
+            @foreach ($user->orders as $order)
+                @foreach ($order->items as $item)
+                <div class="col-md-4">
+                    <div class="order-card">
+                        <img src="{{ asset('storage/' . $item->product->image) }}" alt="">
+                        <h5>{{ $item->product->name }}</h5>
+                        <span>R$ {{ number_format($item->product->price, 2, ',', '.') }}</span>
+                    </div>
                 </div>
-            </div>
-
-            {{-- CARD 2 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Outro produto</h5>
-                    <span>R$ 89,90</span>
-                </div>
-            </div>
-
-            {{-- CARD 3 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Mais um anúncio</h5>
-                    <span>R$ 349,00</span>
-                </div>
-            </div>
+                @endforeach
+            @endforeach
 
         </div>
     </div>

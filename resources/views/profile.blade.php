@@ -1,110 +1,139 @@
 @extends('layouts.main_layout')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @endsection
 
 @section('content')
 
 @auth
-<p> PERFIL DE {{ Auth::user()->name }} </p>
-@endauth
 
+{{-- HEADER PERFIL --}}
+<div class="profile-header-section">
+    <div class="container profile-header-inner">
+
+        <div class="profile-avatar-big">
+            <img src="https://via.placeholder.com/300" alt="Foto de perfil">
+        </div>
+
+        <div class="profile-header-info">
+            <h2>{{ Auth::user()->name }}</h2>
+
+            {{-- TEXTO DA BIO --}}
+            <p class="profile-bio" id="bioText">
+                {{ Auth::user()->bio ?? 'Adicione uma descrição ao seu perfil.' }}
+            </p>
+
+            {{-- FORM BIO --}}
+            <form
+                action="{{ route('profile.bio.update') }}"
+                method="POST"
+                id="bioForm"
+                style="display:none;"
+            >
+                @csrf
+
+                <textarea
+                    name="bio"
+                    id="bioInput"
+                    class="profile-bio-input"
+                >{{ Auth::user()->bio ?? '' }}</textarea>
+
+                <div class="bio-actions">
+                    <button type="submit" class="bio-save">Salvar</button>
+                    <button type="button" class="bio-cancel" onclick="cancelBioEdit()">Cancelar</button>
+                </div>
+            </form>
+
+            <a class="edit-link" id="editBioBtn" onclick="enableBioEdit()">
+                Editar biografia
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{{-- CONTEÚDO --}}
 <div class="container profile-page">
-
     <div class="row g-4">
 
-        {{-- PERFIL --}}
+        {{-- INFO CONTA --}}
         <div class="col-lg-4">
             <div class="profile-card">
 
-                <div class="profile-avatar">
-                    <img
-                        src="https://via.placeholder.com/300"
-                        alt="Foto de perfil">
+                <h4>Informações da conta</h4>
+
+                <div class="profile-data-row">
+                    <small>Nome</small>
+                    <span>{{ Auth::user()->name }}</span>
                 </div>
 
-                <h3>Nome do Usuário</h3>
-                <p>email@exemplo.com</p>
+                <div class="profile-data-row">
+                    <small>Email</small>
+                    <span>{{ Auth::user()->email }}</span>
+                </div>
 
-                {{-- PROTÓTIPO: sem ação --}}
-                <label class="change-photo">
-                    Alterar foto
-                    <input type="file" hidden>
-                </label>
+                <div class="profile-data-row">
+                    <small>Tipo de conta</small>
+                    <span>Comprador / Vendedor</span>
+                </div>
+
+                <a href="{{ route('profile.edit') }}" class="edit-link edit-profile-link">
+                    Editar perfil
+                </a>
 
             </div>
         </div>
 
-        {{-- DADOS --}}
+        {{-- PEDIDOS --}}
         <div class="col-lg-8">
-            <div class="profile-box">
-                <h4>Meus dados</h4>
+            <div class="orders-box">
 
-                {{-- PROTÓTIPO: sem action --}}
-                <form>
+                <div class="orders-header">
+                    <h4>Meus pedidos</h4>
+                    <a href="#">Ver todos</a>
+                </div>
 
-                    <div class="mb-3">
-                        <label>Nome</label>
-                        <input type="text" placeholder="Nome do usuário">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="order-card">
+                            <img src="https://via.placeholder.com/300x200">
+                            <h5>Produto anunciado</h5>
+                            <span>R$ 199,90</span>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" placeholder="email@exemplo.com">
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Nova senha</label>
-                        <input type="password" placeholder="********">
-                    </div>
-
-                    <button type="button" class="btn-save">
-                        Salvar alterações
-                    </button>
-
-                </form>
             </div>
         </div>
 
     </div>
-
-    {{-- MEUS PEDIDOS / ANÚNCIOS --}}
-    <div class="orders-box">
-        <h4>Meus pedidos</h4>
-
-        <div class="row g-3">
-
-            {{-- CARD 1 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Produto anunciado</h5>
-                    <span>R$ 199,90</span>
-                </div>
-            </div>
-
-            {{-- CARD 2 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Outro produto</h5>
-                    <span>R$ 89,90</span>
-                </div>
-            </div>
-
-            {{-- CARD 3 --}}
-            <div class="col-md-4">
-                <div class="order-card">
-                    <img src="https://via.placeholder.com/300x200" alt="">
-                    <h5>Mais um anúncio</h5>
-                    <span>R$ 349,00</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 </div>
+
+{{-- JS --}}
+<script>
+let originalBio = document.getElementById('bioText').innerText;
+
+function enableBioEdit() {
+    document.getElementById('bioText').style.display = 'none';
+    document.getElementById('editBioBtn').style.display = 'none';
+    document.getElementById('bioForm').style.display = 'block';
+}
+
+function cancelBioEdit() {
+    document.getElementById('bioInput').value = originalBio;
+    document.getElementById('bioForm').style.display = 'none';
+    document.getElementById('bioText').style.display = 'block';
+    document.getElementById('editBioBtn').style.display = 'inline-block';
+}
+</script>
+
+@endauth
+
+@guest
+<div class="container mt-5">
+    <h3>Você precisa estar logado para acessar o perfil.</h3>
+</div>
+@endguest
 
 @endsection

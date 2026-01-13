@@ -1,137 +1,151 @@
-/* ===== GERAL ===== */
-
-.profile-page {
-    margin-top: 30px;
-    margin-bottom: 60px;
+* {
+    box-sizing: border-box;
 }
 
-h2, h4 {
-    font-weight: 600;
+body {
+    background: #1f1f1f;
 }
 
-/* ===== HEADER ===== */
-
-.profile-header-section {
-    background: #fff;
-    padding: 40px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.profile-header-inner {
-    display: flex;
-    align-items: center;
+/* layout geral */
+.gg-profile-page {
+    max-width: 1300px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
     gap: 30px;
 }
 
-.profile-avatar-big img {
-    width: 130px;
-    height: 130px;
+/* sidebar */
+.gg-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gg-user-card {
+    background: #111;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    color: #fff;
+}
+
+.gg-avatar {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #ddd;
+    margin-bottom: 12px;
 }
 
-.profile-header-info h2 {
-    margin-bottom: 6px;
-}
-
-.profile-bio {
-    color: #555;
-    margin-bottom: 4px;
-    max-width: 500px;
-}
-
-.profile-bio-input {
-    width: 100%;
-    max-width: 500px;
-    min-height: 70px;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-/* ===== LINKS DE AÇÃO ===== */
-
-.edit-link {
+.gg-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
     font-size: 14px;
-    color: #0d6efd;
-    cursor: pointer;
-    text-decoration: none;
+    color: #2ecc71;
 }
 
-.edit-link:hover {
-    text-decoration: underline;
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2ecc71;
 }
 
-.edit-profile-link {
-    margin-top: 14px;
-    display: inline-block;
-}
-
-/* ===== CARDS ===== */
-
-.profile-card {
+.gg-box {
     background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 20px;
 }
 
-.profile-data-row {
-    display: flex;
-    flex-direction: column;
+.gg-box h4 {
     margin-bottom: 10px;
 }
 
-.profile-data-row small {
-    color: #888;
-    font-size: 12px;
-}
-
-.profile-data-row span {
+.gg-box ul {
+    list-style: none;
+    padding: 0;
     font-size: 14px;
 }
 
-/* ===== PEDIDOS ===== */
-
-.orders-box {
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    padding: 20px;
+.gg-box li {
+    margin-bottom: 6px;
 }
 
-.orders-header {
+.verified li {
+    color: #27ae60;
+}
+
+.gg-report {
+    text-align: center;
+    font-size: 14px;
+    color: #3498db;
+}
+
+/* main */
+.gg-main {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+/* header reputação */
+.gg-reputation-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.orders-header a {
-    font-size: 14px;
-    color: #0d6efd;
-    text-decoration: none;
-}
-
-.order-card {
-    border: 1px solid #eee;
+.gg-reputation-header select {
+    padding: 6px 10px;
     border-radius: 8px;
-    overflow: hidden;
-    padding: 10px;
 }
 
-.order-card img {
-    width: 100%;
-    border-radius: 6px;
+/* cards */
+.gg-reputation-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.rep {
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.rep strong {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.positive { background: #ecf9f1; }
+.neutral  { background: #f2f2f2; }
+.negative { background: #fdecec; }
+
+/* reviews */
+.gg-reviews h3 {
+    margin-bottom: 20px;
+}
+
+.gg-review-card {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.review-text {
+    font-style: italic;
     margin-bottom: 8px;
 }
 
-.order-card h5 {
-    font-size: 14px;
-    margin-bottom: 4px;
-}
-
-.order-card span {
+.review-meta {
     font-size: 13px;
-    color: #555;
+    color: #666;
 }

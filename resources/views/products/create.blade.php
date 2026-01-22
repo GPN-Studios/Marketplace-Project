@@ -39,7 +39,7 @@
 
     <div class="col-6 col-md-2">
       <label for="price" class="form-label">Preço</label>
-      <input type="text" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="0">
+      <input type="text" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="0.00" step="0.01">
 
       @error('price')
         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -54,6 +54,23 @@
         <div class="text-danger small mt-1">{{ $message }}</div>
       @enderror
     </div>
+
+    <div class="col-12">
+    <label class="form-label fw-semibold mb-2">Tags</label>
+
+    <div class="row g-2">
+      @foreach ($tags as $tag)
+        <div class="col-md-3 col-sm-6">
+          <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->name }}" id="tag-{{ $tag->id }}">
+                      <label class="form-check-label" for="tag-{{ $tag->id }}">
+                          {{ $tag->name }}
+                      </label>
+                  </div>
+              </div>
+          @endforeach
+      </div>
+  </div>
 
     <div class="col-12 text-center">
       <button type="submit" class="btn btn-primary mb-3 btn-lg">Criar</button>

@@ -10,10 +10,10 @@ body {
    NAVBAR
 */
 .custom-navbar {
-    background-color: #FFD42A;
+    background: linear-gradient(0deg, #FFB703, #FFD42A);
     height: 10vh;
     border-radius: 4px;
-}
+}   
 
 /*
    LOGO

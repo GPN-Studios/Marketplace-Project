@@ -54,6 +54,14 @@
             <div class="seller-info">
                 Vendido e entregue por <strong>{{ $product->user->name }}</strong>
             </div>
+
+            <div class="tags">
+                Tags:
+                @foreach ($product->tags as $tag)
+                    {{$tag->name}}
+                @endforeach
+                
+            </div>
         </div>
 
         {{-- CAIXA DE COMPRA --}}
@@ -87,7 +95,7 @@
     <div class="description-box">
         <h3>Descrição do produto</h3>
         <p>{{ $product->description }}</p>
-    </div>
+    </div>  
 
 </div>
 

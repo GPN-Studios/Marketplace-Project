@@ -11,15 +11,18 @@ use Illuminate\View\View;
 //user-related routes
 Route::middleware('auth')->group(function() {
 
-    Route::get('/profile',[UserController::class, 'profile'])->name('profile');
+    Route::get('/profile/{user}',[UserController::class, 'profile'])->name('profile');
+    
+    Route::patch('/update/{user}',[UserController::class, 'update'])->name('user.update');
+
+    Route::patch('/pfpupdate/{user}',[UserController::class, 'pfpupdate'])->name('user.pfp.update');
 });
 
-
-
-//products
+//products-related routes
 Route::middleware('auth')->prefix('products')->group(function() {
 
     Route::get('create', [ProductController::class, 'create'])->name('products.create');
+
     Route::post('store', [ProductController::class, 'store'])->name('products.store');
 
     Route::get('show/{id}' , [ProductController::class, 'show' ])->name('products.show');
@@ -39,10 +42,10 @@ Route::middleware('auth')->prefix('cart')->group(function() {
 
 });
 
-// dashboard
+//dashboard
 Route::get('/',[DashboardController::class, 'home'])->name('home');
 
-//rotas que usuários não logados poderão acessar mas usuários logados não
+//guest routes
 Route::middleware('guest')->group(function() {
 
     Route::view('/login', 'auth.login')->name('login');

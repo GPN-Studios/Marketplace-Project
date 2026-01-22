@@ -81,23 +81,19 @@
 
     {{-- MEUS PEDIDOS / ANÚNCIOS --}}
     <div class="orders-box">
-        <h4>Meus pedidos</h4>
+        <h4>Meus Anúncios</h4>
 
         <div class="row g-3">
-
             {{-- CARD --}}
-            @foreach ($user->orders as $order)
-                @foreach ($order->items as $item)
+            @foreach ($user->products as $product)
                 <div class="col-md-4">
                     <div class="order-card">
-                        <img src="{{ asset('storage/' . $item->product->image) }}" alt="">
-                        <h5>{{ $item->product->name }}</h5>
-                        <span>R$ {{ number_format($item->product->price, 2, ',', '.') }}</span>
+                        <img src="{{ asset('storage/' . $product->image ) }}" alt="">
+                        <h5>{{ $product->name }}</h5>
+                        <span>R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                     </div>
                 </div>
-                @endforeach
             @endforeach
-
         </div>
     </div>
 

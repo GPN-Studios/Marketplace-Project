@@ -12,9 +12,9 @@ class Order extends Model
 {
 
     protected $fillable = [
-    'user_id', 
-    'total',  // soma de todos os produtos somados
-    'status',
+        'user_id', 
+        'total',  // soma de todos os produtos somados
+        'status',
     ];
 
 

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Rating;
 
 class User extends Authenticatable
 {
@@ -66,9 +67,16 @@ class User extends Authenticatable
         return $this->hasOne(Order::class)->where('status', 'cart');
     }
 
+    public function ratingsReceived()
+    {
+        return $this->hasMany(Rating::class, 'seller_id');
+    }
 
-
-
+    // Avaliações que o usuário fez como comprador
+    public function ratingsGiven()
+    {
+        return $this->hasMany(Rating::class, 'buyer_id');
+    }
 
 
 

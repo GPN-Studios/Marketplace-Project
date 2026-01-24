@@ -46,4 +46,19 @@ class ProductController extends Controller
 
         return view('products.show', compact('product', 'tags'));
     }
+
+    public function update(Request $request, Product $product): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => 'sometimes|string|min:5|max:255',
+            'image' => 'sometimes|image|max:2048',
+            'description' => 'sometimes|string|max:1000',
+            'price' => 'sometimes|numeric|min:1',
+            'stock' => 'sometimes|integer|min:1',
+        ]);
+
+        $product->update($data);
+
+        return redirect()->route('products.show', encrypt($product->id));
+    }
 }

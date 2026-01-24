@@ -27,6 +27,7 @@ Route::middleware('auth')->prefix('products')->group(function() {
 
     Route::get('show/{id}' , [ProductController::class, 'show' ])->name('products.show');
 
+    Route::post('update', [ProductController::class, 'update'])->name('products.update');
 });
 
 //cart routes

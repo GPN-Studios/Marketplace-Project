@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         // show view with all the products
         return view('dashboard', [
-            'products' => Product::latest()->paginate(10)
+            'products' => Product::with('tags')->latest()->paginate(10)
         ]);
     }
 

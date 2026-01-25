@@ -1,79 +1,92 @@
 @extends('layouts.main_layout')
+
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">    <!-- public/css/home.css -->
+<link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 @endsection
+
 @section('content')
 
+<div class="container cart-page">
 
-@auth
-<p> Carrinho de {{Auth::user()->name;}}  </p>
-@endauth
+    @auth
+        <h2 class="cart-title">
+            Carrinho de <span>{{ Auth::user()->name }}</span>
+        </h2>
+    @endauth
 
-@if($cart)
-<div class="row">
-    <div class="col-12 d-flex">
+    @if($cart && $cart->items->count())
 
-        <table class="table">
+    <div class="cart-wrapper">
+
+        <table class="cart-table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">Quantidade</th>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Qtd</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
-            @foreach ($cart->items as $item)
+
+            <tbody>
+                @foreach ($cart->items as $item)
                 <tr>
-                    <th scope="row"></th>
-                    <td>{{$item->product_name}}</td>
-                    <td>{{$item->price}}</td>
-                    <td>{{$item->quantity}}</td>
-                    <td class="d-flex me-2">
-                    <form action="{{ route('cart.update' , $item) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-
-                        <input type="hidden" name="action" value="increase">
-
-                        <button type="submit" class="me-2"><i class="fa-solid fa-arrow-up p-1"></i></button>
-                    
-                    </form>
-                    <form action="{{ route('cart.update' , $item) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-
-                        <input type="hidden" name="action" value="decrease">
-
-                        <button type="submit"><i class="fa-solid fa-arrow-down p-1"></i></button>
-                    </form>
-
-                    <form action="{{ route('cart.delete', $item) }}" method="POST">
-                        @csrf
-
-                        <button type="submit" class="bg-danger ms-4"><i class="bg-danger p-1 pe-2">DELETE</i></button>
-
-                    </form>
+                    <!-- PRODUTO SEM IMAGEM, NOME SIMPLES -->
+                    <td class="product-name">
+                        {{ $item->product_name }}
                     </td>
 
+                    <td class="product-price">
+                        R$ {{ number_format($item->price, 2, ',', '.') }}
+                    </td>
+
+                    <td class="quantity">
+                        {{ $item->quantity }}
+                    </td>
+
+                    <td class="actions d-flex gap-1">
+                        <!-- Aumentar quantidade -->
+                        <form action="{{ route('cart.update', $item) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <input type="hidden" name="action" value="increase">
+                            <button class="btn-icon increase">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+
+                        <!-- Diminuir quantidade -->
+                        <form action="{{ route('cart.update', $item) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <input type="hidden" name="action" value="decrease">
+                            <button class="btn-icon decrease">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                        </form>
+
+                        <!-- Remover item -->
+                        <form action="{{ route('cart.delete', $item) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn-icon delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-            @endforeach
-
-
-
-
-
+                @endforeach
+            </tbody>
+        </table>
 
     </div>
 
+    @else
+        <div class="empty-cart">
+            🛒 Seu carrinho está vazio
+        </div>
+    @endif
+
 </div>
-    
-@else
-    <p>Nada aqui por enquanto!</p>
-@endif
-
-
-
-
-
 
 @endsection

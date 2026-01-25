@@ -3,12 +3,15 @@ body {
 }
 
 /* ================= HEADER ================= */
+
 .profile-header {
     background: linear-gradient(0deg, #2FAF9B, #0A7F78);
-    padding: 20px 0;
+    padding: 28px 0;
+    margin-bottom: 32px; /* 🔹 espaço entre header e conteúdo */
 }
 
 /* ================= AVATAR ================= */
+
 .profile-avatar-wrapper {
     position: relative;
     cursor: pointer;
@@ -21,11 +24,11 @@ body {
     height: 120px;
     border-radius: 50%;
     border: 3px solid #ffffff;
-    object-fit: cover;
-    transition: 0.3s;
+    object-fit: contain;
+    background: #ffffff;
 }
 
-/* Overlay editar foto */
+/* Overlay */
 .profile-avatar-overlay {
     position: absolute;
     inset: 0;
@@ -48,12 +51,8 @@ body {
     opacity: 1;
 }
 
-.profile-avatar-overlay i {
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
 /* ================= USUÁRIO ================= */
+
 .profile-user-info {
     display: flex;
     flex-direction: column;
@@ -63,37 +62,31 @@ body {
 .profile-edit-btn {
     background: none;
     border: none;
-    color: #dffaf6;
+    color: #e0f7f4;
     font-size: 14px;
     padding: 0;
-    text-align: left;
     cursor: pointer;
     text-decoration: underline;
-    transition: 0.2s;
 }
 
 .profile-edit-btn:hover {
     color: #ffffff;
 }
 
-.profile-status {
-    background: #28a745;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 12px;
-}
-
 /* ================= CONTEÚDO ================= */
+
 .profile-content {
     margin-top: 24px;
+    margin-bottom: 48px; /* 🔹 espaço inferior geral */
 }
 
 /* ================= CARDS ================= */
+
 .profile-card {
     background: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 1px 4px rgba(10, 127, 120, 0.3);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .profile-card h5,
@@ -102,31 +95,191 @@ body {
 }
 
 /* ================= REPUTAÇÃO ================= */
+
 .profile-reputation {
     background: #f1f1f1;
-    padding: 15px;
+    padding: 14px;
     border-radius: 8px;
     font-weight: 600;
 }
 
 .profile-reputation.positive {
-    color: #28a745;
-}
-
-.profile-reputation.neutral {
-    color: #6c757d;
+    color: #22c55e;
 }
 
 .profile-reputation.negative {
-    color: #dc3545;
+    color: #ef4444;
 }
 
 /* ================= AVALIAÇÕES ================= */
+
 .profile-review {
-    border-top: 1px solid #eeeeee;
-    padding: 15px 0;
+    border-top: 1px solid #e5e7eb;
+    padding: 12px 0;
 }
 
 .profile-review:first-child {
     border-top: none;
+}
+
+/* ================= MEUS ANÚNCIOS ================= */
+
+.orders-box {
+    margin-top: 40px;          /* 🔹 afasta do header */
+    margin-bottom: 60px;       /* 🔹 evita ficar colado no fim */
+    padding: 28px;             /* 🔹 respiro interno */
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.orders-box h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 24px;
+}
+
+/* Card do anúncio */
+
+.order-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Imagem do produto */
+
+.order-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+/* Nome */
+
+.order-card h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 6px 0 0;
+}
+
+/* Preço */
+
+.order-card span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0A7F78;
+}
+
+/* ================= EDIÇÃO CENTRAL ================= */
+
+.profile-edit-center {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* ================= BOTÕES PADRÃO ================= */
+
+.btn-site {
+    background: #2FAF9B;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border: none;
+}
+
+.btn-site:hover {
+    background: #0A7F78;
+    color: #ffffff;
+}
+
+.btn-site-outline {
+    border: 1px solid #2FAF9B;
+    color: #2FAF9B;
+    background: transparent;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-site-outline:hover {
+    background: #2FAF9B;
+    color: #ffffff;
+}
+
+.profile-review {
+    position: relative;
+    padding: 16px 16px 16px 20px;
+    margin-bottom: 12px;
+    border-top: 1px solid #eeeeee;
+}
+
+/* remove borda do primeiro */
+.profile-review:first-child {
+    border-top: none;
+}
+
+/* barra lateral */
+.profile-review::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* avaliação positiva */
+.profile-review.positive::before {
+    background: #22c55e; /* verde padrão do site */
+}
+
+/* avaliação negativa */
+.profile-review.negative::before {
+    background: #ef4444; /* vermelho moderno */
+}
+
+/* texto da avaliação */
+.profile-review p {
+    margin: 0;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+/* detalhe vendedor/comprador */
+.profile-review small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media (max-width: 768px) {
+    .orders-box {
+        padding: 20px;
+        margin-top: 28px;
+    }
+
+    .profile-header {
+        margin-bottom: 24px;
+    }
 }

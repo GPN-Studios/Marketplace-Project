@@ -4,8 +4,8 @@
 /* Fonte base */
 body {
     font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    padding-top: 10vh; /* evita que o conteúdo fique atrás da navbar */
 }
-
 /*
    NAVBAR
 */
@@ -13,7 +13,14 @@ body {
     background: linear-gradient(0deg, #FFB703, #FFD42A);
     height: 10vh;
     border-radius: 4px;
-}   
+
+    position: fixed;   /* fixa no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;     /* fica acima de tudo */
+}
 
 /*
    LOGO

@@ -1,202 +1,214 @@
-/* ================= CARROSSEL ================= */
+/* =========================
+   BASE
+========================= */
+
+:root {
+    --bg-page: #ffffff;
+    --text-main: #4b5563;     /* cinza mais suave */
+    --text-muted: #6b7280;
+    --primary: #2FAF9B;
+    --border-light: #e5e7eb;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,.04);
+    --shadow-md: 0 8px 20px rgba(0,0,0,.06);
+}
+
 body {
-    background-color: #f2f2f2;  
+    background-color: var(--bg-page);
+    color: var(--text-main);
 }
 
-.dashboard-carousel-wrapper {
-    width: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
+/* =========================
+   LAYOUT
+========================= */
+
+.content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 32px 24px;
 }
 
-/* ================= INDICADORES (BOLINHAS) ================= */
+/* =========================
+   TAG SECTION
+========================= */
 
-.carousel-indicators {
-    position: absolute;
-    top: 16px;
-    right: 24px;
-    pointer-events: none;
-    display: flex;
-    gap: 8px;
-    z-index: 6;
+.tag-section {
+    padding: 0;
 }
 
-.carousel-indicators .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+/* =========================
+   TÍTULO
+========================= */
 
-    background-color: #ffffff;
-    border: 1px solid #cfcfcf;
-
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+.tag-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 18px;
 }
 
-.carousel-indicators .dot.active {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
+/* =========================
+   GRID
+========================= */
 
-/* ================= CONTAINER DO CARROSSEL ================= */
-
-.dashboard-carousel {
-    width: 1226px;
-    padding: 52px 24px 20px;
-
+.tag-products {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 220px;
-    column-gap: 20px;
-
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 6px;
-
-    overflow: hidden;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 18px;
 }
 
-/* ================= CARD ================= */
+/* =========================
+   CARD
+========================= */
 
 .product-card {
-    flex: 0 0 220px;
+    display: block;
 }
 
 .product-card .card {
-    width: 220px;
-    height: 340px;
-
-    display: flex;
-    flex-direction: column;
-
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-
-    transition: box-shadow 0.25s ease;
+    height: 100%;
+    background-color: transparent; /* remove sensação de caixa */
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    transition: 
+        box-shadow .2s ease,
+        transform .2s ease,
+        border-color .2s ease;
 }
 
-.product-card .card:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) !important;
+.product-card:hover .card {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--primary);
 }
 
-/* ================= IMAGEM ================= */
+/* =========================
+   IMAGE
+========================= */
 
 .product-image-wrapper {
-    width: 100%;
-    height: 220px;
-    overflow: hidden;
-
+    height: 180px;
+    background-color: #f9fafb;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: #f8f8f8;
 }
 
 .product-image-wrapper img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
 }
 
-/* ================= TEXTO ================= */
+/* =========================
+   TEXT
+========================= */
 
-/* 🔹 AGORA O BODY DO CARD É FLEX */
 .product-card .card-body {
-    padding: 12px 10px;
-    text-align: center;
-
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    flex: 1; /* ocupa o espaço restante do card */
+    gap: 4px;
+    height: auto;
 }
 
 .product-card .card-title {
     font-size: 14px;
+    line-height: 1.35;
+    color: var(--text-main);
     margin-bottom: 6px;
 
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-
     overflow: hidden;
-    line-height: 1.3;
 
-    transition: color 0.2s ease;
+    transition: color .2s ease;
 }
 
-/* 🔹 PREÇO FIXO NA MESMA ALTURA */
 .product-card .card-text {
-    margin-top: auto;       /* 🔥 chave da correção */
-    font-size: 20px;
+    margin-top: auto;
+    font-size: 16px;
     font-weight: 700;
-
-    transition: color 0.2s ease;
+    color: #2FAF9B;
+    text-align: center;
+    padding-bottom: 3px;       
+    border-bottom: 1.5px solid #2FAF9B;
 }
 
-/* 🔹 HOVER: TEXTO AZUL */
+/* VENDEDOR */
+.seller-name {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    transition: color .2s ease;
+}
+
+/* HOVER AZUL (menos agressivo) */
 .product-card:hover .card-title,
-.product-card:hover .card-text {
-    color: #0d6efd;
+.product-card:hover .seller-name {
+    color: var(--primary);
 }
 
-/* ================= BOTÕES ================= */
+/* =========================
+   VER MAIS
+========================= */
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 62px;
-    height: 62px;
-
-    background-color: #ffffff;
-    border: 1px solid rgba(0,0,0,0.2);
-    border-radius: 50%;
-
-    cursor: pointer;
-    z-index: 10;
-
+.tag-more {
+    margin: 24px 0 48px;
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    gap: 16px;
 }
 
-.carousel-btn.hidden {
-    display: none;
+.tag-more::before,
+.tag-more::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #111; /* preto suave estilo GGMAX */
+    opacity: .3;
 }
 
-.carousel-btn.left {
-    left: 10px;
+.tag-more a {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    text-decoration: none;
+    padding: 6px 12px;
+    transition: color .2s ease;
 }
 
-.carousel-btn.right {
-    right: 10px;
+.tag-more a:hover {
+    color: var(--primary);
 }
 
-.carousel-btn i {
-    font-size: 18px;
-}
-
-/* ================= RESPONSIVO ================= */
+/* =========================
+   RESPONSIVO
+========================= */
 
 @media (max-width: 1200px) {
-    .dashboard-carousel {
-        width: 980px;
+    .tag-products {
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
 @media (max-width: 992px) {
-    .dashboard-carousel {
-        width: 740px;
+    .tag-products {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media (max-width: 576px) {
-    .dashboard-carousel {
-        width: 260px;
+@media (max-width: 768px) {
+    .tag-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .tag-products {
+        grid-template-columns: 1fr;
     }
 }

@@ -1,86 +1,156 @@
 @extends('layouts.main_layout')
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">    <!-- public/css/home.css -->
-@endsection
-@section('content')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/create.css') }}">
+@endsection
+
+@section('content')
 
 @auth
 
-<div class="container">
-    <form method="POST" enctype="multipart/form-data" action="{{ route('products.store') }}" class="row g-3 border rounded">
-    @csrf
-    <div class="col-6">
-      <label for="product_name" class="form-label">Nome do Produto</label>
-      <input type="name" class="form-control" name="name" id="product_name" placeholder="Digite o nome do produto..." value="{{ old('name') }}">
+<div class="container product-create">
 
-      @error('name')
-        <div class="text-danger small mt-1">{{ $message }}</div>
-      @enderror
+    <div class="create-header mb-5">
+        <h1>Anunciar produto</h1>
+        <p>Preencha as informações abaixo para publicar seu anúncio</p>
     </div>
 
-    <div class="col-6">
-      <label for="img" class="form-label">Escolha a imagem do produto</label>
-      <input type="file" class="form-control" name="image" id="img">
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+        action="{{ route('products.store') }}"
+    >
+        @csrf
 
-      @error('image')
-        <div class="text-danger small mt-1">{{ $message }}</div>
-      @enderror
-    </div>
+        <div class="row gx-5 gy-5">
 
-    <div class="col-12">
-      <label for="description" class="form-label">Descrição</label>
-      <input type="text" class="form-control" name="description" id="description" placeholder="Descrição..." value="{{ old('description') }}">
+            <div class="col-lg-8">
 
-      @error('description')
-        <div class="text-danger small mt-1">{{ $message }}</div>
-      @enderror
-    </div>
+                {{-- Basic Info --}}
+                <div class="create-card">
+                    <h3 class="card-title">Informações do produto</h3>
 
-    <div class="col-6 col-md-2">
-      <label for="price" class="form-label">Preço</label>
-      <input type="text" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="0.00" step="0.01">
+                    <div class="row gy-4 gx-4">
 
-      @error('price')
-        <div class="text-danger small mt-1">{{ $message }}</div>
-      @enderror
-    </div>
+                        <div class="col-md-8">
+                            <label class="form-label">Nome do produto</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="name"
+                                placeholder="Nomeie seu produto..."
+                                value="{{ old('name') }}"
+                            >
+                            @error('name')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-    <div class="col-6 col-md-2">
-      <label for="stock" class="form-label">Quantidade</label>
-      <input type="number" name="stock" id="stock" class="form-control" min="0" max="999" value="{{ old('stock') }}" placeholder="0">
+                        <div class="col-md-4">
+                            <label class="form-label">Quantidade</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="stock"
+                                min="0"
+                                placeholder="0"
+                                value="{{ old('stock') }}"
+                            >
+                            @error('stock')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-      @error('stock')
-        <div class="text-danger small mt-1">{{ $message }}</div>
-      @enderror
-    </div>
+                        <div class="col-12">
+                            <label class="form-label">Descrição</label>
+                            <textarea
+                                class="form-control"
+                                name="description"
+                                rows="4"
+                                placeholder="Descreva seu produto..."
+                            >{{ old('description') }}</textarea>
+                            @error('description')
+                                <small class="text-danger d-block mt-1">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-    <div class="col-12">
-    <label class="form-label fw-semibold mb-2">Tags</label>
+                    </div>
+                </div>
 
-    <div class="row g-2">
-      @foreach ($tags as $tag)
-        <div class="col-md-3 col-sm-6">
-          <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->name }}" id="tag-{{ $tag->id }}">
-                      <label class="form-check-label" for="tag-{{ $tag->id }}">
-                          {{ $tag->name }}
-                      </label>
-                  </div>
-              </div>
-          @endforeach
-      </div>
-  </div>
+                {{-- Tags --}}
+                <div class="create-card">
+                    <h3 class="card-title">Categorias e tags</h3>
 
-    <div class="col-12 text-center">
-      <button type="submit" class="btn btn-primary mb-3 btn-lg">Criar</button>
-    </div>
-</form>
+                    <div class="tags-container">
+                        @foreach ($tags as $tag)
+                            <label class="tag-item">
+                                <input
+                                    type="checkbox"
+                                    name="tags[]"
+                                    value="{{ $tag->name }}"
+                                    {{ in_array($tag->name, old('tags', [])) ? 'checked' : '' }}
+                                >
+                                <span>{{ $tag->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                {{-- Image --}}
+                <div class="create-card">
+                    <h3 class="card-title">Imagem do produto</h3>
+
+                    <input
+                        type="file"
+                        class="form-control"
+                        name="image"
+                    >
+
+                    @error('image')
+                        <small class="text-danger d-block mt-2">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                {{-- Price --}}
+                <div class="create-card">
+                    <h3 class="card-title">Preço</h3>
+
+                    <div class="price-box">
+                        <span class="currency">R$</span>
+                        <input
+                            type="text"
+                            class="form-control price-input"
+                            name="price"
+                            placeholder="0,00"
+                            value="{{ old('price') }}"
+                        >
+                    </div>
+
+                    @error('price')
+                        <small class="text-danger d-block mt-2">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                {{-- Button --}}
+                <div class="publish-box">
+                    <button type="submit" class="btn btn-success btn-lg w-100">
+                        Publicar anúncio
+                    </button>
+                    <small class="text-muted d-block text-center mt-3">
+                        Seu produto ficará visível imediatamente
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
 </div>
-
-
-
-
 
 @endauth
 

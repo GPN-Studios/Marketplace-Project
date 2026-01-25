@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Spatie\Tags\Tag;
 use Illuminate\View\View;
-
-
 
 class DashboardController extends Controller
 {
-    
-    public function home(): view
+    public function home(): View
     {
-        // show view with all the products
-        return view('dashboard', [
-            'products' => Product::with('tags')->latest()->paginate(10)
-        ]);
+        $tags = Tag::all()->map(function ($tag) {
+
+            $tag->products = Product::withAnyTags([$tag->name])
+                ->latest()
+                ->take(5)
+                ->get();
+
+            return $tag;
+        });
+
+        return view('dashboard', compact('tags'));
     }
-
-
-
-
-
-
-
 }

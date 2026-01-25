@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
     <div class="container-fluid">
 
-        {{-- Logo --}}
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img 
                 src="{{ asset('imgs/logo-verde-azulado.png') }}"
@@ -10,7 +9,6 @@
             >
         </a>
 
-        {{-- BUSCA (CENTRO REAL) --}}
         <form class="d-flex custom-search" role="search">
             <input class="form-control custom-search-input" type="search" placeholder="Pesquisar...">
             <button class="btn search-btn" type="submit">
@@ -18,13 +16,11 @@
             </button>
         </form>
 
-        {{-- Botão mobile --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- Links --}}
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav ms-auto align-items-center gap-2">
 

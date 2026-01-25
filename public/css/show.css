@@ -1,80 +1,63 @@
-/* ================= BASE ================= */
+/* =========================
+   BASE
+========================= */
 
-body {
-    background-color: #f2f3f4;
+:root {
+    --primary: #2FAF9B;
+    --price: #2FAF9B;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg-soft: #f9fafb;
+    --shadow-md: 0 10px 30px rgba(0,0,0,.08);
 }
 
 .product-show {
-    margin-top: 8px;
+    padding: 32px 0 64px;
+    color: var(--text-main);
 }
 
-/* ================= TOAST CENTRAL FIXO ================= */
-
-.toast-fixed-wrapper {
-    position: fixed;
-    top: 72px; 
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3000;
-    pointer-events: none;
-}
-
-.custom-toast {
-    display: inline-block;        
-    background-color: #2FAF9B;
-    color: #ffffff;
-
-    padding: 12px 14px;       
-    border-radius: 3px;
-
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.2;           
-
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.custom-toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.custom-toast.toast {
-    width: auto;
-}
-
-/* ================= VENDEDOR ================= */
+/* =========================
+   VENDEDOR (TOPO)
+========================= */
 
 .seller {
     font-size: 14px;
-    color: #555;
+    color: var(--text-muted);
 }
 
-/* ================= GALERIA ================= */
+.seller-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.seller-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   GALERIA
+========================= */
 
 .product-gallery {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-
+    background-color: var(--bg-soft);
+    border-radius: 16px;
+    padding: 24px;
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    height: 420px;
+    align-items: center;
 }
 
 .product-gallery img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 420px;
     object-fit: contain;
 }
 
-/* ================= INFO PRODUTO ================= */
+/* =========================
+   INFO PRODUTO
+========================= */
 
 .product-title {
     font-size: 26px;
@@ -84,79 +67,142 @@ body {
 
 .rating {
     font-size: 14px;
-    color: #333;
-    margin-bottom: 12px;
+    color: #f59e0b;
+    margin-bottom: 6px;
 }
 
 .rating span {
-    color: #777;
+    color: var(--text-muted);
 }
 
 .stock {
     font-size: 14px;
-    margin-bottom: 8px;
+    color: #2FAF9B;
+    margin-bottom: 12px;
 }
 
 .seller-info {
     font-size: 14px;
-    color: #555;
+    color: var(--text-muted);
+    margin-bottom: 14px;
 }
 
-/* ================= CAIXA DE COMPRA ================= */
+/* =========================
+   TAGS
+========================= */
+
+.tags {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tags span {
+    background-color: var(--bg-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* =========================
+   CAIXA DE COMPRA
+========================= */
 
 .buy-box {
-    background-color: #fff;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    box-shadow: var(--shadow-md);
+    background-color: #fff;
 }
 
 .old-price {
     font-size: 14px;
+    color: var(--text-muted);
     text-decoration: line-through;
-    color: #777;
 }
 
 .price {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    color: #000;
+    color: var(--price);
+    margin: 4px 0;
 }
 
 .pix {
     font-size: 14px;
-    color: #0d6efd;
+    color: var(--text-muted);
     margin-bottom: 16px;
 }
 
-/* ================= DESCRIÇÃO ================= */
+.buy-box button {
+    height: 44px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+/* =========================
+   DESCRIÇÃO
+========================= */
 
 .description-box {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 24px;
-    margin-top: 24px;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
 }
 
 .description-box h3 {
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 12px;
 }
 
 .description-box p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
-    color: #444;
+    color: var(--text-main);
 }
 
-/* ================= RESPONSIVO ================= */
+/* =========================
+   TOAST
+========================= */
+
+.toast-fixed-wrapper {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 9999;
+}
+
+.custom-toast {
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: var(--shadow-md);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
 
 @media (max-width: 992px) {
-    .product-gallery {
-        height: 320px;
+    .product-title {
+        font-size: 22px;
     }
 
-    .toast-fixed-wrapper {
-        top: 64px;
+    .price {
+        font-size: 24px;
+    }
+
+    .product-gallery img {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .buy-box {
+        margin-top: 24px;
     }
 }

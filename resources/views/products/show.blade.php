@@ -25,11 +25,6 @@
 
 <div class="container product-show">
 
-    {{-- VENDEDOR --}}
-    <div class="seller mb-2">
-        Vendido por <strong>{{ $product->user->name }}</strong>
-    </div>
-
     <div class="row g-4">
 
         {{-- GALERIA --}}
@@ -52,15 +47,17 @@
             </div>
 
             <div class="seller-info">
-                Vendido e entregue por <strong>{{ $product->user->name }}</strong>
+                Vendido e entregue por
+                <a href="{{ route('profile', $product->user->id) }}" class="seller-link">
+                    <strong>{{ $product->user->name }}</strong>
+                </a>
             </div>
 
             <div class="tags">
                 Tags:
                 @foreach ($product->tags as $tag)
-                    {{$tag->name}}
+                    {{ $tag->name }}
                 @endforeach
-                
             </div>
         </div>
 

@@ -9,10 +9,10 @@
 @auth
 
 <!-- HEADER -->
-<div class="container-fluid profile-header">
-    <div class="container d-flex align-items-center gap-3">
+<div class="container-fluid profile-header mb-4">
+    <div class="container d-flex align-items-center gap-3 py-3">
 
-        <!-- FOTO DE PERFIL -->
+        <!-- FOTO -->
         <form action="{{ route('user.pfp.update', $user) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -41,17 +41,15 @@
                 Editar perfil
             </button>
         </div>
-
     </div>
-
 </div>
 
 <!-- CONTEÚDO -->
 <div class="container profile-content">
-    <div class="row">
 
-        <!-- SIDEBAR -->
-        <aside class="col-md-4">
+    <div class="row">
+        <!-- DETALHES -->
+        <aside class="col-md-4" id="profile-details">
             <div class="profile-card mb-3">
                 <h6>Detalhes</h6>
                 <p><strong>Email:</strong> {{ $user->email }}</p>
@@ -59,10 +57,9 @@
             </div>
         </aside>
 
-        <!-- MAIN -->
+        <!-- REPUTAÇÃO / PERFIL -->
         <main class="col-md-8">
 
-            <!-- VISUALIZAÇÃO -->
             <div id="profile-view">
 
                 <div class="profile-card mb-3">
@@ -82,26 +79,11 @@
                     </div>
                 </div>
 
-                <div class="profile-card">
-                    <h5>Últimas avaliações</h5>
-
-                    <div class="profile-review">
-                        <p>"Atendimento demorado demais"</p>
-                        <small>Recebida como <strong>vendedor</strong></small>
-                    </div>
-
-                    <div class="profile-review">
-                        <p>"Comprei unranked mas veio platina"</p>
-                        <small>Recebida como <strong>vendedor</strong></small>
-                    </div>
-                </div>
-
             </div>
 
             <!-- EDIÇÃO -->
             <div id="profile-edit" style="display: none;">
-
-                <div class="profile-card">
+                <div class="profile-card text-center mx-auto" style="max-width: 500px;">
                     <h5>Editar perfil</h5>
 
                     <form action="{{ route('user.update', $user) }}" method="POST">
@@ -109,13 +91,8 @@
                         @method('PATCH')
 
                         <div class="mb-3">
-                            <label class="form-label">Nome de usuário</label>
+                            <label class="form-label">Nome</label>
                             <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" value="{{ $user->email }}" disabled>
                         </div>
 
                         <div class="mb-3">
@@ -128,37 +105,51 @@
                             <input type="password" name="password_confirmation" class="form-control">
                         </div>
 
-                        <div class="d-flex gap-2">
+                        <div class="d-flex justify-content-center gap-2">
                             <button type="submit" class="btn btn-success">
-                                Salvar alterações
+                                Salvar
                             </button>
-
                             <button type="button" class="btn btn-secondary" onclick="toggleEdit(false)">
                                 Cancelar
                             </button>
                         </div>
-
                     </form>
                 </div>
-
             </div>
 
         </main>
-
     </div>
 </div>
 
+<!-- ÚLTIMAS AVALIAÇÕES -->
+<div class="container mt-4">
+    <div class="profile-card">
+        <h5>Últimas avaliações</h5>
 
-    {{-- MEUS PEDIDOS / ANÚNCIOS --}}
+        <div class="profile-review positive">
+            <p>"Atendimento demorado demais"</p>
+            <div class="review-meta negative">Avaliação negativa</div>
+            <small>Recebida como <strong>vendedor</strong></small>
+        </div>
+
+        <div class="profile-review negative">
+            <p>"Comprei unranked mas veio platina"</p>
+            <div class="review-meta positive">Avaliação positiva</div>
+            <small>Recebida como <strong>vendedor</strong></small>
+        </div>
+    </div>
+</div>
+
+<!-- MEUS ANÚNCIOS -->
+<div class="container mt-5 mb-5">
     <div class="orders-box">
         <h4>Meus Anúncios</h4>
 
         <div class="row g-3">
-            {{-- CARD --}}
             @foreach ($user->products as $product)
                 <div class="col-md-4">
                     <div class="order-card">
-                        <img src="{{ asset('storage/' . $product->image ) }}" alt="">
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="">
                         <h5>{{ $product->name }}</h5>
                         <span>R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                     </div>
@@ -166,11 +157,13 @@
             @endforeach
         </div>
     </div>
+</div>
 
 <script>
-function toggleEdit(showEdit) {
-    document.getElementById('profile-view').style.display = showEdit ? 'none' : 'block';
-    document.getElementById('profile-edit').style.display = showEdit ? 'block' : 'none';
+function toggleEdit(edit) {
+    document.getElementById('profile-view').style.display = edit ? 'none' : 'block';
+    document.getElementById('profile-edit').style.display = edit ? 'block' : 'none';
+    document.getElementById('profile-details').style.display = edit ? 'none' : 'block';
 }
 </script>
 

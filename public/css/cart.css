@@ -1,0 +1,170 @@
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+    --primary: #2FAF9B;
+    --price: #2FAF9B;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg-soft: #f9fafb;
+    --shadow-md: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.cart-page {
+    padding: 40px 0 60px;
+}
+
+.cart-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.cart-title span {
+    color: var(--primary);
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.cart-wrapper {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    overflow-x: auto;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table thead {
+    background-color: var(--bg-soft);
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.cart-table td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    white-space: normal; /* permite quebras de linha */
+}
+
+/* =========================
+   PRODUTO
+========================= */
+
+.product-name {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.product-price {
+    font-weight: 700;
+    color: var(--price);
+}
+
+/* =========================
+   QUANTIDADE
+========================= */
+
+.quantity {
+    font-weight: 600;
+    text-align: center;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--bg-soft);
+    transition: all 0.2s ease;
+}
+
+.btn-icon i {
+    font-size: 14px;
+}
+
+.btn-icon.increase:hover {
+    background-color: rgba(47, 175, 155, 0.15);
+    color: var(--primary);
+}
+
+.btn-icon.decrease:hover {
+    background-color: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+}
+
+.btn-icon.delete:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+/* =========================
+   CARRINHO VAZIO
+========================= */
+
+.empty-cart {
+    text-align: center;
+    padding: 60px 0;
+    font-size: 18px;
+    color: var(--text-muted);
+}
+
+.product-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+    .cart-title {
+        font-size: 20px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 12px;
+    }
+}

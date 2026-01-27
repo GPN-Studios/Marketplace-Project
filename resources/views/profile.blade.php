@@ -147,6 +147,7 @@
 
         <div class="row g-3">
             @foreach ($user->products as $product)
+            <a href="{{ route('products.show', encrypt($product->id)) }}">
                 <div class="col-md-4">
                     <div class="order-card">
                         <img src="{{ asset('storage/' . $product->image) }}" alt="">
@@ -154,6 +155,7 @@
                         <span>R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                     </div>
                 </div>
+            </a>
             @endforeach
         </div>
     </div>

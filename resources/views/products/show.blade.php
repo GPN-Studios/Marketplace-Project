@@ -25,6 +25,21 @@
 
 <div class="container product-show">
 
+    @can('update', $product)
+          <a href="">Editar</a>
+        @endcan
+
+        @can('delete', $product)
+            <form action="{{ route('products.delete', $product) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="btn btn-danger">
+            Excluir produto
+        </button>
+    </form>
+        @endcan
+
     <div class="row g-4">
 
         {{-- GALERIA --}}
@@ -38,6 +53,7 @@
         <div class="col-lg-4">
             <h1 class="product-title">{{ $product->name }}</h1>
 
+            <!-- placeholder -->
             <div class="rating">
                 ⭐ 4.8 <span>(1574 avaliações)</span>
             </div>

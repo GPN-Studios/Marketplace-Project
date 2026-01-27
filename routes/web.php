@@ -28,7 +28,10 @@ Route::middleware('auth')->prefix('products')->group(function () {
 
     Route::get('show/{id}', [ProductController::class, 'show'])->name('products.show');
 
-    Route::post('update', [ProductController::class, 'update'])->name('products.update');
+    Route::patch('update', [ProductController::class, 'update'])->name('products.update');
+    Route::get('edit', [ProductController::class, 'edit'])->name('products.edit');
+
+    Route::delete('delete/{product}', [ProductController::class, 'delete'])->name('products.delete');
 });
 
 // ================= CART =================
@@ -40,7 +43,7 @@ Route::middleware('auth')->prefix('cart')->group(function () {
 
     Route::patch('/update/{item}', [OrderController::class, 'update'])->name('cart.update');
 
-    Route::post('/delete/{item}', [OrderController::class, 'delete'])->name('cart.delete');
+    Route::delete('/delete/{item}', [OrderController::class, 'delete'])->name('cart.delete');
 });
 
 // ================= DASHBOARD =================

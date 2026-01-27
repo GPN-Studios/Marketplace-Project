@@ -16,7 +16,15 @@ class UserController extends Controller
 
         return view('profile', compact('user'));
     }
-    
+
+    public function userProducts()
+    {
+        $user = Auth::user();
+        $user->load('products');
+
+        return view('user_products');
+    }
+
     public function update(Request $request, User $user) /* RedirectResponse */
     {
         $this->authorize('update', $user);

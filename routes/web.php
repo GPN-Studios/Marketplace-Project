@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/update/{user}', [UserController::class, 'update'])->name('user.update');
 
     Route::patch('/pfpupdate/{user}', [UserController::class, 'pfpupdate'])->name('user.pfp.update');
+
+    Route::get('/my-Products', [UserController::class, 'userProducts'])->name('user.products');
 });
 
 // ================= PRODUCTS =================
@@ -28,8 +30,8 @@ Route::middleware('auth')->prefix('products')->group(function () {
 
     Route::get('show/{id}', [ProductController::class, 'show'])->name('products.show');
 
-    Route::patch('update', [ProductController::class, 'update'])->name('products.update');
-    Route::get('edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::patch('update/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
 
     Route::delete('delete/{product}', [ProductController::class, 'delete'])->name('products.delete');
 });

@@ -28,7 +28,7 @@ class StoreProductRequest extends FormRequest
             'price'       => 'required|numeric|min:1',
             'stock'       => 'required|integer|min:1',
             'image'       => 'required|image|mimes:jpeg,png,webp|max:2048',
-            'tags'        => 'nullable|array',
+            'tags'        => 'required|array|min:1',
             'tags.*'      => 'string',
         ];
     }
@@ -58,6 +58,8 @@ class StoreProductRequest extends FormRequest
             'image.image'    => 'O arquivo enviado deve ser uma imagem válida.',
             'image.mimes'    => 'A imagem deve ser do tipo JPEG, PNG ou WEBP.',
             'image.max'      => 'A imagem não pode ultrapassar 2MB.',
+
+            'tags.required' => 'Escolha pelo menos uma tag para seu produto.'
         ];
     }
 }

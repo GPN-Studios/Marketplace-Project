@@ -21,9 +21,9 @@ class ProductController extends Controller
         return view('products.create', compact('tags'));
     }
 
-    public function edit(): View
+    public function edit(Product $product): View
     {
-        return view('products.edit');
+        return view('products.edit', compact('product'));
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
@@ -33,9 +33,7 @@ class ProductController extends Controller
             'user_id' => Auth::id()
         ])->except('tags'));
 
-        if($request->filled('tags')) {
-            $product->syncTags($request->input('tags'));
-        }
+        $product->syncTags($request->tags);
 
         return back()->with('success', 'Produto criado com sucesso.');
     }

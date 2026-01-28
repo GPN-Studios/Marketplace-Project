@@ -6,6 +6,19 @@
 
 @section('content')
 
+{{-- HERO COM DEGRADE --}}
+<section class="hero-gradient">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Ofertas imperdíveis pra você
+        </h1>
+        <p class="hero-subtitle">
+            Produtos selecionados com o melhor preço e entrega rápida.
+        </p>
+    </div>
+</section>
+
+{{-- CONTEÚDO ORIGINAL --}}
 <div class="content d-flex flex-column gap-5">
 
 @foreach ($tags as $tag)
@@ -26,17 +39,14 @@
                 </div>
 
                 <div class="card-body">
-                    {{-- NOME DO PRODUTO --}}
                     <p class="card-title">
                         {{ $product->name }}
                     </p>
 
-                    {{-- PREÇO --}}
                     <p class="card-text">
                         R$ {{ number_format($product->price, 2, ',', '.') }}
                     </p>
 
-                    {{-- USUÁRIO --}}
                     <p class="seller-name">
                         Criado por {{ $product->user->name }}
                     </p>

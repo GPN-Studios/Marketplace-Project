@@ -145,17 +145,19 @@
     <div class="orders-box">
         <h4>Meus Anúncios</h4>
 
-        <div class="row g-3">
+        <div class="products-grid">
             @foreach ($user->products as $product)
-            <a href="{{ route('products.show', encrypt($product->id)) }}">
-                <div class="col-md-4">
+                <a href="{{ route('products.show', encrypt($product->id)) }}" class="text-decoration-none">
                     <div class="order-card">
                         <img src="{{ asset('storage/' . $product->image) }}" alt="">
+
                         <h5>{{ $product->name }}</h5>
-                        <span>R$ {{ number_format($product->price, 2, ',', '.') }}</span>
+
+                        <span>
+                            R$ {{ number_format($product->price, 2, ',', '.') }}
+                        </span>
                     </div>
-                </div>
-            </a>
+                </a>
             @endforeach
         </div>
     </div>

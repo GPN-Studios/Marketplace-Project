@@ -2,15 +2,11 @@ body {
     background-color: #f5f6f8;
 }
 
-/* ================= HEADER ================= */
-
 .profile-header {
     background: linear-gradient(0deg, #2FAF9B, #0A7F78);
     padding: 28px 0;
-    margin-bottom: 32px; /* 🔹 espaço entre header e conteúdo */
+    margin-bottom: 32px;
 }
-
-/* ================= AVATAR ================= */
 
 .profile-avatar-wrapper {
     position: relative;
@@ -28,19 +24,16 @@ body {
     background: #ffffff;
 }
 
-/* Overlay */
 .profile-avatar-overlay {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.6);
     color: #ffffff;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     opacity: 0;
     transition: 0.3s;
     font-size: 13px;
@@ -51,7 +44,6 @@ body {
     opacity: 1;
 }
 
-/* ================= USUÁRIO ================= */
 
 .profile-user-info {
     display: flex;
@@ -73,14 +65,11 @@ body {
     color: #ffffff;
 }
 
-/* ================= CONTEÚDO ================= */
 
 .profile-content {
     margin-top: 24px;
-    margin-bottom: 48px; /* 🔹 espaço inferior geral */
+    margin-bottom: 48px;
 }
-
-/* ================= CARDS ================= */
 
 .profile-card {
     background: #ffffff;
@@ -93,8 +82,6 @@ body {
 .profile-card h6 {
     font-weight: 600;
 }
-
-/* ================= REPUTAÇÃO ================= */
 
 .profile-reputation {
     background: #f1f1f1;
@@ -111,23 +98,54 @@ body {
     color: #ef4444;
 }
 
-/* ================= AVALIAÇÕES ================= */
 
 .profile-review {
     border-top: 1px solid #e5e7eb;
     padding: 12px 0;
+    position: relative;
+    padding-left: 20px;
 }
 
 .profile-review:first-child {
     border-top: none;
 }
 
-/* ================= MEUS ANÚNCIOS ================= */
+.profile-review::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.profile-review.positive::before {
+    background: #22c55e;
+}
+
+.profile-review.negative::before {
+    background: #ef4444;
+}
+
+.profile-review p {
+    margin: 0;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.profile-review small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
 
 .orders-box {
-    margin-top: 40px;          /* 🔹 afasta do header */
-    margin-bottom: 60px;       /* 🔹 evita ficar colado no fim */
-    padding: 28px;             /* 🔹 respiro interno */
+    margin-top: 40px;
+    margin-bottom: 60px;
+    padding: 28px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -137,64 +155,70 @@ body {
     font-size: 1.3rem;
     font-weight: 600;
     color: #1f2937;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
-/* Card do anúncio */
 
-.order-card {
+.orders-box .products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+
+.orders-box .order-card {
     background: #ffffff;
     border-radius: 10px;
-    padding: 16px;
-
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-
+    gap: 6px;
     border: 1px solid #e5e7eb;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.order-card:hover {
-    transform: translateY(-4px);
+.orders-box .order-card:hover {
+    transform: translateY(-3px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* Imagem do produto */
 
-.order-card img {
+.orders-box .order-card img {
     width: 100%;
-    height: 160px;
+    height: 120px;
     object-fit: contain;
     background: #f9fafb;
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
-/* Nome */
 
-.order-card h5 {
-    font-size: 1rem;
+.orders-box .order-card h5 {
+    font-size: 0.9rem;
     font-weight: 600;
     color: #111827;
-    margin: 6px 0 0;
+    margin: 2px 0;
 }
 
-/* Preço */
 
-.order-card span {
-    font-size: 1rem;
+.orders-box .product-description {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.3;
+}
+
+
+.orders-box .product-stock {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+
+.orders-box .order-card span {
+    font-size: 0.9rem;
     font-weight: 700;
     color: #0A7F78;
 }
-
-/* ================= EDIÇÃO CENTRAL ================= */
-
-.profile-edit-center {
-    max-width: 520px;
-    margin: 0 auto;
-}
-
-/* ================= BOTÕES PADRÃO ================= */
 
 .btn-site {
     background: #2FAF9B;
@@ -207,7 +231,6 @@ body {
 
 .btn-site:hover {
     background: #0A7F78;
-    color: #ffffff;
 }
 
 .btn-site-outline {
@@ -223,60 +246,26 @@ body {
     color: #ffffff;
 }
 
-.profile-review {
-    position: relative;
-    padding: 16px 16px 16px 20px;
-    margin-bottom: 12px;
-    border-top: 1px solid #eeeeee;
+@media (max-width: 1200px) {
+    .orders-box .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-/* remove borda do primeiro */
-.profile-review:first-child {
-    border-top: none;
+@media (max-width: 992px) {
+    .orders-box .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
-
-/* barra lateral */
-.profile-review::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 5px;
-    height: 100%;
-    border-radius: 4px;
-}
-
-/* avaliação positiva */
-.profile-review.positive::before {
-    background: #22c55e; /* verde padrão do site */
-}
-
-/* avaliação negativa */
-.profile-review.negative::before {
-    background: #ef4444; /* vermelho moderno */
-}
-
-/* texto da avaliação */
-.profile-review p {
-    margin: 0;
-    font-size: 14px;
-    color: #1f2937;
-}
-
-/* detalhe vendedor/comprador */
-.profile-review small {
-    display: block;
-    margin-top: 6px;
-    font-size: 12px;
-    color: #6b7280;
-}
-
-/* ================= RESPONSIVO ================= */
 
 @media (max-width: 768px) {
     .orders-box {
         padding: 20px;
         margin-top: 28px;
+    }
+
+    .orders-box .products-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .profile-header {

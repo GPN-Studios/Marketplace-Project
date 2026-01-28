@@ -1,10 +1,50 @@
-/* =========================
+/*
+   HERO
+*/
+
+.hero-gradient {
+    width: 100%;
+    min-height: 300px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0A7F78 0%,
+            #2FAF9B 45%,
+            #F2F2F2 100%
+        );
+
+    display: flex;
+    align-items: center;
+}
+
+
+.hero-gradient .hero-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.hero-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #ffffff;
+    max-width: 520px;
+}
+
+/*
    BASE
-========================= */
+*/
 
 :root {
-    --bg-page: #ffffff;
-    --text-main: #4b5563;     /* cinza mais suave */
+    --bg-page: #F2F2F2;
+    --text-main: #4b5563;
     --text-muted: #6b7280;
     --primary: #2FAF9B;
     --border-light: #e5e7eb;
@@ -17,9 +57,9 @@ body {
     color: var(--text-main);
 }
 
-/* =========================
+/*
    LAYOUT
-========================= */
+*/
 
 .content {
     max-width: 1300px;
@@ -27,17 +67,17 @@ body {
     padding: 32px 24px;
 }
 
-/* =========================
+/*
    TAG SECTION
-========================= */
+*/
 
 .tag-section {
     padding: 0;
 }
 
-/* =========================
-   TÍTULO
-========================= */
+/*
+   TITLE
+*/
 
 .tag-title {
     font-size: 22px;
@@ -46,9 +86,9 @@ body {
     margin-bottom: 18px;
 }
 
-/* =========================
+/*
    GRID
-========================= */
+*/
 
 .tag-products {
     display: grid;
@@ -56,9 +96,9 @@ body {
     gap: 18px;
 }
 
-/* =========================
+/*
    CARD
-========================= */
+*/
 
 .product-card {
     display: block;
@@ -66,7 +106,7 @@ body {
 
 .product-card .card {
     height: 100%;
-    background-color: transparent; /* remove sensação de caixa */
+    background-color: #ffffff;
     border-radius: 12px;
     border: 1px solid var(--border-light);
     overflow: hidden;
@@ -82,9 +122,9 @@ body {
     border-color: var(--primary);
 }
 
-/* =========================
+/*
    IMAGE
-========================= */
+*/
 
 .product-image-wrapper {
     height: 180px;
@@ -100,9 +140,9 @@ body {
     object-fit: contain;
 }
 
-/* =========================
+/*
    TEXT
-========================= */
+*/
 
 .product-card .card-body {
     padding: 12px;
@@ -132,7 +172,7 @@ body {
     font-weight: 700;
     color: #2FAF9B;
     text-align: center;
-    padding-bottom: 3px;       
+    padding-bottom: 3px;
     border-bottom: 1.5px solid #2FAF9B;
 }
 
@@ -144,7 +184,7 @@ body {
     transition: color .2s ease;
 }
 
-/* HOVER AZUL (menos agressivo) */
+/* HOVER */
 .product-card:hover .card-title,
 .product-card:hover .seller-name {
     color: var(--primary);
@@ -166,7 +206,7 @@ body {
     content: "";
     flex: 1;
     height: 1px;
-    background-color: #111; /* preto suave estilo GGMAX */
+    background-color: #111;
     opacity: .3;
 }
 
@@ -204,6 +244,10 @@ body {
 @media (max-width: 768px) {
     .tag-products {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-title {
+        font-size: 28px;
     }
 }
 

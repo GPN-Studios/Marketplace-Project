@@ -22,7 +22,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->load('products');
 
-        return view('user_products');
+        return view('user_products', compact('user'));
     }
 
     public function update(Request $request, User $user) /* RedirectResponse */

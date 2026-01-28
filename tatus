@@ -1,0 +1,25 @@
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{0}: checkout: moving from master to feature/frontend-redesign
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{1}: checkout: moving from feature/frontend-redesign to master
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{2}: checkout: moving from master to feature/frontend-redesign
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{3}: checkout: moving from develop to master
+[33m0978f76[m HEAD@{4}: commit: feat: complete frontend redesign with new features
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{5}: checkout: moving from develop to develop
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{6}: checkout: moving from master to develop
+[33mf955264[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/frontend-redesign[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/feature/frontend-redesign[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{7}: pull origin master: Fast-forward
+[33maed30ac[m HEAD@{8}: pull origin master: Fast-forward
+[33md36ebc0[m HEAD@{9}: checkout: moving from master to master
+[33md36ebc0[m HEAD@{10}: commit (merge): Merge feature/user-ratings into frontend-dashboard-profile
+[33m48c4278[m HEAD@{11}: commit (merge): Frontend: profile dashboard layout and navbar updates
+[33mb375390[m HEAD@{12}: checkout: moving from master to master
+[33mb375390[m HEAD@{13}: commit: merge: integrate feature/user-updates into master
+[33m1c45cde[m HEAD@{14}: checkout: moving from master to master
+[33m1c45cde[m HEAD@{15}: commit: chore: prepare codebase for merge from feature/profile-dashboard-backend
+[33m23c7a6b[m[33m ([m[1;31morigin/feature/profile-dashboard-backend[m[33m, [m[1;32mfeature/profile-dashboard-backend[m[33m)[m HEAD@{16}: checkout: moving from master to master
+[33m23c7a6b[m[33m ([m[1;31morigin/feature/profile-dashboard-backend[m[33m, [m[1;32mfeature/profile-dashboard-backend[m[33m)[m HEAD@{17}: checkout: moving from master to master
+[33m23c7a6b[m[33m ([m[1;31morigin/feature/profile-dashboard-backend[m[33m, [m[1;32mfeature/profile-dashboard-backend[m[33m)[m HEAD@{18}: checkout: moving from feature/profile-dashboard-backend to master
+[33m23c7a6b[m[33m ([m[1;31morigin/feature/profile-dashboard-backend[m[33m, [m[1;32mfeature/profile-dashboard-backend[m[33m)[m HEAD@{19}: checkout: moving from master to feature/profile-dashboard-backend
+[33m23c7a6b[m[33m ([m[1;31morigin/feature/profile-dashboard-backend[m[33m, [m[1;32mfeature/profile-dashboard-backend[m[33m)[m HEAD@{20}: commit: style(dashboard): rework ui and profile page prototype
+[33m75e9da2[m HEAD@{21}: commit (merge): Merge branch 'backend/cart' of https://github.com/GPN-Studios/Marketplace-Project
+[33m3ac5d0d[m HEAD@{22}: commit: refactor: rework navbar layout
+[33m3a765b3[m[33m ([m[1;31morigin/frontend/bootstrap-rework[m[33m)[m HEAD@{23}: pull origin frontend/bootstrap-rework: Fast-forward
+[33m78daf9e[m HEAD@{24}: clone: from https://github.com/GPN-Studios/Marketplace-Project

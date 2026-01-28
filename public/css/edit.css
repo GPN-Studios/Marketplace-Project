@@ -1,0 +1,115 @@
+body {
+    background-color: #f5f7fa;
+}
+
+.product-edit {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+/* Header */
+
+.edit-header h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #1f2937;
+}
+
+.edit-header p {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* Cards */
+
+.edit-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.edit-card + .edit-card {
+    margin-top: 36px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+}
+
+/* Form */
+
+.form-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    padding: 10px 12px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #2FAF9B;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+/* Price */
+
+.price-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.currency {
+    font-weight: 600;
+    color: #374151;
+    font-size: 1.1rem;
+}
+
+.price-input {
+    flex: 1;
+}
+
+/* Button */
+
+.publish-box {
+    margin-top: 24px;
+}
+
+.publish-box button {
+    border-radius: 12px;
+    padding: 14px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.publish-box small {
+    margin-top: 8px;
+}
+
+/* Responsiveness */
+
+@media (max-width: 991px) {
+    .product-edit {
+        margin-top: 70px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .edit-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .edit-card {
+        padding: 18px;
+    }
+}

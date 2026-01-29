@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +49,19 @@ Route::middleware('auth')->prefix('cart')->group(function () {
 
     Route::delete('/delete/{item}', [OrderController::class, 'delete'])->name('cart.delete');
 });
+
+// ================= CHECKOUT =================
+Route::middleware('auth')->group(function () {
+    Route::post('/checkout/{order}', [CheckoutController::class, 'checkout'])->name('checkout');
+
+    Route::post('/orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
+
+    Route::post('/ratings/{orderItem}', [RatingController::class, 'store'])->name('ratings.store');
+
+    Route::post('/withdraw', [CheckoutController::class, 'withdraw'])->name('withdraw');
+
+});
+
 
 // ================= DASHBOARD =================
 Route::get('/', [DashboardController::class, 'home'])->name('home');

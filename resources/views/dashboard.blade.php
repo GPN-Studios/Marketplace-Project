@@ -18,6 +18,39 @@
     </div>
 </section>
 
+{{-- TAGS / CATEGORIAS --}}
+<section class="tag-boxes">
+    <div class="tag-boxes-container">
+
+        <h2 class="tag-boxes-title">
+            Categorias
+        </h2>
+
+        <div class="tag-boxes-grid">
+            @foreach ($tags as $tag)
+                <a href="{{ route('tags.show', $tag->slug) }}"
+                   class="tag-box">
+
+                    <p class="tag-box-name">
+                        {{ $tag->name }}
+                    </p>
+
+                    <div class="tag-box-image">
+                        <img src="{{ asset('imgs/tags/' . $tag->slug . '.png') }}"
+                             alt="{{ $tag->name }}">
+                    </div>
+
+                    <span class="tag-box-action">
+                        Ver produtos →
+                    </span>
+
+                </a>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
 {{-- CONTEÚDO ORIGINAL --}}
 <div class="content d-flex flex-column gap-5">
 

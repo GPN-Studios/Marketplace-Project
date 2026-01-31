@@ -75,10 +75,7 @@ class CheckoutController extends Controller
             ]);
         });
 
-        return back()->with(
-            'success',
-            'Entrega confirmada! Agora você pode avaliar os produtos.'
-        );
+        return back()->with('success', 'Entrega confirmada! Agora você pode avaliar os produtos.');
     }
 
     /**
@@ -98,4 +95,10 @@ class CheckoutController extends Controller
 
         return back()->with('success', 'Saque realizado com sucesso.');
     }
+
+    
+
+
+
+
 }

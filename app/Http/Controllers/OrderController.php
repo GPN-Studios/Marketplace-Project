@@ -16,7 +16,6 @@ class OrderController extends Controller
 
     public function index() : View
     {
-
         return view('cart.cart_index',[
             'cart' => Order::with('items.product')->where('user_id', Auth::id())->where('status', 'cart')->first()
         ]);

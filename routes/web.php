@@ -52,9 +52,10 @@ Route::middleware('auth')->prefix('cart')->group(function () {
 
 // ================= CHECKOUT =================
 Route::middleware('auth')->group(function () {
+
     Route::post('/checkout/{order}', [CheckoutController::class, 'checkout'])->name('checkout');
 
-    Route::post('/orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
+    Route::post('/checkout/{order}/complete', [CheckoutController::class, 'confirmDelivery'])->name('checkout.complete');
 
     Route::post('/ratings/{orderItem}', [RatingController::class, 'store'])->name('ratings.store');
 

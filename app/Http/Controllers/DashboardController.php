@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
             $tag->products = Product::withAnyTags([$tag->name])
                 ->latest()
-                ->take(5)
+                ->take(6)
                 ->get();
 
             return $tag;

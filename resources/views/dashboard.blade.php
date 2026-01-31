@@ -6,6 +6,52 @@
 
 @section('content')
 
+{{-- HERO COM DEGRADE --}}
+<section class="hero-gradient">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Ofertas imperdíveis pra você
+        </h1>
+        <p class="hero-subtitle">
+            Produtos selecionados com o melhor preço e entrega rápida.
+        </p>
+    </div>
+</section>
+
+{{-- TAGS / CATEGORIAS --}}
+<section class="tag-boxes">
+    <div class="tag-boxes-container">
+
+        <h2 class="tag-boxes-title">
+            Categorias
+        </h2>
+
+        <div class="tag-boxes-grid">
+            @foreach ($tags as $tag)
+                <a href="{{ route('tags.show', $tag->slug) }}"
+                   class="tag-box">
+
+                    <p class="tag-box-name">
+                        {{ $tag->name }}
+                    </p>
+
+                    <div class="tag-box-image">
+                        <img src="{{ asset('imgs/tags/' . $tag->slug . '.png') }}"
+                             alt="{{ $tag->name }}">
+                    </div>
+
+                    <span class="tag-box-action">
+                        Ver produtos →
+                    </span>
+
+                </a>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
+{{-- CONTEÚDO ORIGINAL --}}
 <div class="content d-flex flex-column gap-5">
 
 @foreach ($tags as $tag)
@@ -17,7 +63,7 @@
 
     <div class="tag-products">
         @foreach ($tag->products as $product)
-        <a href="{{ route('products.show', encrypt($product->id)) }}"
+        <a href="{{ route('products.show', $product ) }}"
            class="product-card text-decoration-none text-reset">
 
             <div class="card">
@@ -26,17 +72,14 @@
                 </div>
 
                 <div class="card-body">
-                    {{-- NOME DO PRODUTO --}}
                     <p class="card-title">
                         {{ $product->name }}
                     </p>
 
-                    {{-- PREÇO --}}
                     <p class="card-text">
                         R$ {{ number_format($product->price, 2, ',', '.') }}
                     </p>
 
-                    {{-- USUÁRIO --}}
                     <p class="seller-name">
                         Criado por {{ $product->user->name }}
                     </p>

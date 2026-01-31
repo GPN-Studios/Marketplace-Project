@@ -1,6 +1,6 @@
-/* =========================
+/*
    BASE
-========================= */
+*/
 
 :root {
     --primary: #2FAF9B;
@@ -17,29 +17,6 @@
     color: var(--text-main);
 }
 
-/* =========================
-   VENDEDOR (TOPO)
-========================= */
-
-.seller {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-.seller-link {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.seller-link:hover {
-    text-decoration: underline;
-}
-
-/* =========================
-   GALERIA
-========================= */
-
 .product-gallery {
     background-color: var(--bg-soft);
     border-radius: 16px;
@@ -55,10 +32,6 @@
     object-fit: contain;
 }
 
-/* =========================
-   INFO PRODUTO
-========================= */
-
 .product-title {
     font-size: 26px;
     font-weight: 600;
@@ -71,13 +44,9 @@
     margin-bottom: 6px;
 }
 
-.rating span {
-    color: var(--text-muted);
-}
-
 .stock {
     font-size: 14px;
-    color: #2FAF9B;
+    color: var(--primary);
     margin-bottom: 12px;
 }
 
@@ -87,27 +56,43 @@
     margin-bottom: 14px;
 }
 
-/* =========================
-   TAGS
-========================= */
+.seller-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
 
 .tags {
-    font-size: 13px;
-    color: var(--text-muted);
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 12px;
 }
 
 .tags span {
     background-color: var(--bg-soft);
     padding: 4px 10px;
     border-radius: 999px;
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
-/* =========================
-   CAIXA DE COMPRA
-========================= */
+.product-about {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.product-about h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.product-about p {
+    font-size: 14px;
+    line-height: 1.6;
+}
 
 .buy-box {
     border: 1px solid var(--border);
@@ -127,7 +112,6 @@
     font-size: 28px;
     font-weight: 700;
     color: var(--price);
-    margin: 4px 0;
 }
 
 .pix {
@@ -136,73 +120,32 @@
     margin-bottom: 16px;
 }
 
-.buy-box button {
-    height: 44px;
-    font-weight: 600;
-    border-radius: 10px;
-}
-
-/* =========================
-   DESCRIÇÃO
-========================= */
-
-.description-box {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-}
-
-.description-box h3 {
-    font-size: 20px;
-    font-weight: 600;
+.product-quantity {
     margin-bottom: 12px;
 }
 
-.description-box p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--text-main);
+.quantity-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
 }
 
-/* =========================
-   TOAST
-========================= */
-
-.toast-fixed-wrapper {
-    position: fixed;
-    top: 80px;
-    right: 24px;
-    z-index: 9999;
+.available-stock {
+    color: var(--text-muted);
 }
 
-.custom-toast {
-    background-color: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    padding: 12px 18px;
-    box-shadow: var(--shadow-md);
+.product-quantity select {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 0 10px;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media (max-width: 992px) {
-    .product-title {
-        font-size: 22px;
-    }
-
-    .price {
-        font-size: 24px;
-    }
-
-    .product-gallery img {
-        max-height: 300px;
-    }
-}
-
-@media (max-width: 576px) {
-    .buy-box {
-        margin-top: 24px;
-    }
+.owner-actions {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }

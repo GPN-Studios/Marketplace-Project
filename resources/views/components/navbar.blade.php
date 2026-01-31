@@ -40,7 +40,7 @@
                         <li><a class="dropdown-item" href="{{ route('profile', Auth::id() ) }}">Meu Perfil</a></li>
                         <li><a class="dropdown-item" href="{{ route('products.create') }}">Anunciar produto</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.products') }}">Meus Anúncios</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.products') }}">Meus Pedidos</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.orders') }}">Meus Pedidos</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">

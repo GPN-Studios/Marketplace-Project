@@ -30,7 +30,7 @@ Route::middleware('auth')->prefix('products')->group(function () {
 
     Route::post('store', [ProductController::class, 'store'])->name('products.store');
 
-    Route::get('show/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('show/{product}', [ProductController::class, 'show'])->name('products.show');
 
     Route::patch('update/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::get('edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/ratings/{orderItem}', [RatingController::class, 'store'])->name('ratings.store');
 
     Route::post('/withdraw', [CheckoutController::class, 'withdraw'])->name('withdraw');
+
+    Route::get('/my-Orders', [OrderController::class, 'delete'])->name('user.orders');
 
 });
 

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderAdress;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,10 +24,15 @@ class OrderController extends Controller
 
     public function add(Request $request, Product $product) : RedirectResponse
     {
-
         $request->validate([
             'quantity' => 'required|integer|min:1',
         ]);
+
+        try {
+            $this->authorize('addToCart', $product);
+        } catch (AuthorizationException $e) {
+            return back()->with('error', 'Você não pode adicionar seu próprio produto ao carrinho.');
+        }
 
         $order = Order::firstOrCreate([
             'user_id' => Auth::id(),

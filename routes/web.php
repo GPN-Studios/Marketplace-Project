@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\StripeWebhookController;
+
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Spatie\Tags\Tag;
+
 
 // ================= USER =================
 Route::middleware('auth')->group(function () {
@@ -61,9 +64,21 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/withdraw', [CheckoutController::class, 'withdraw'])->name('withdraw');
 
-    Route::get('/my-Orders', [OrderController::class, 'delete'])->name('user.orders');
+    Route::get('/my-Orders', [OrderController::class, 'myOrders'])->name('user.orders');
+    
+    // ============= Stripe-related ================
+
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
+
+    Route::get('/checkout/cancel/{order}', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 });
+
+// ================= Stripe ====================
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
+
+Route::post('/orders/{order}/checkout', [StripeController::class, 'checkout'])->name('orders.checkout')->middleware('auth');
 
 
 // ================= DASHBOARD =================

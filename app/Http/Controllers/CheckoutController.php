@@ -88,7 +88,6 @@ class CheckoutController extends Controller
         $user = $request->user();
         abort_if($user->balance <= 0, 400, 'Saldo indisponível');
 
-
         $user->update([
             'balance' => 0,
         ]);
@@ -96,9 +95,14 @@ class CheckoutController extends Controller
         return back()->with('success', 'Saque realizado com sucesso.');
     }
 
-    
+    public function success(Order $order)
+    {
+        return view('checkout_success', compact('order'));
+    }
 
-
-
+    public function cancel(Order $order)
+    {
+        return view('checkout_cancel', compact('order'));
+    }
 
 }

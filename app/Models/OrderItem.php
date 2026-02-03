@@ -21,6 +21,12 @@ class OrderItem extends Model
 
 
     //Relations
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
     public function order() {
         return $this->belongsTo(Order::class);
     }

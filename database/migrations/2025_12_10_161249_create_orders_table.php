@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained()
                 ->restrictOnDelete();
             
-            $table->decimal('total', 10, 2)->default(0);    //somatorio do preço de todos os produtos
+            $table->integer('total')->default(0);   //somatorio do preço de todos os produtos
             $table->string('status')->default('cart'); // pending, paid, shipped, cart...
             
             $table->timestamps();

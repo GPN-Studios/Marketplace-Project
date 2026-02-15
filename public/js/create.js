@@ -7,10 +7,6 @@ input.addEventListener('input', (e) => {
 
     hidden.value = value;
 
-
     let number = (value ? Number(value) : 0) / 100;
     e.target.value = number.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    console.log(value);
-    
 });

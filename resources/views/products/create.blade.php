@@ -127,11 +127,13 @@
                         <input
                             type="text"
                             class="form-control price-input"
-                            name="price"
                             placeholder="0,00"
                             value="{{ old('price') }}"
+                            id="priceInput"
                         >
+                    <input type="hidden" name="price" id="priceHidden">
                     </div>
+
 
                     @error('price')
                         <small class="text-danger d-block mt-2">{{ $message }}</small>
@@ -157,4 +159,7 @@
 
 @endauth
 
+@endsection
+@section('scripts')
+<script src="{{ asset('js/create.js') }}"></script>
 @endsection

@@ -28,8 +28,8 @@ return new class extends Migration
             
             $table->string('product_name');
             $table->integer('quantity')->default(1);
-            $table->decimal('price', 10, 2); // preço no momento da compra
-            $table->decimal('subtotal', 10, 2); // quantidade * preço de um produto específico
+            $table->integer('price'); // preço no momento da compra
+            $table->integer('subtotal'); // quantidade * preço de um produto específico
 
             $table->timestamps();
         });

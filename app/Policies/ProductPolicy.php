@@ -22,4 +22,12 @@ class ProductPolicy
     {
         return $user->id === $product->user_id;
     }
+
+    /**
+     * Determine whether the user can insert the product in their cart.
+     */
+    public function addToCart(User $user, Product $product): bool
+    {
+        return $user->id !== $product->user_id;
+    }
 }

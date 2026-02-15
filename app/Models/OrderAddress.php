@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
 
-class OrderAdress extends Model
+class OrderAddress extends Model
 {
-
     protected $fillable = [
         'order_id',
+        'recipient_name',
         'cep',
         'state',
         'city',
@@ -19,11 +18,9 @@ class OrderAdress extends Model
         'complement',
     ];
 
-
-
-    // Relations
-
-    public function order() {
+    //Relations
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 }

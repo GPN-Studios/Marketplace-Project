@@ -87,6 +87,14 @@
         </div>
     @endif
 
+    @if ($cart)
+        <form action="{{route('checkout', $cart)}}" method="POST">
+            @csrf
+            
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    @endif
+
 </div>
 
 @endsection

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderAdress;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,15 +17,22 @@ class OrderController extends Controller
 
     public function index() : View
     {
-
         return view('cart.cart_index',[
             'cart' => Order::with('items.product')->where('user_id', Auth::id())->where('status', 'cart')->first()
         ]);
     }
 
-    public function add(Request $request, string $productId) : RedirectResponse
+    public function add(Request $request, Product $product) : RedirectResponse
     {
-        $product = Product::with('user')->findOrFail(decrypt($productId));   // product, if not used, delete
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        try {
+            $this->authorize('addToCart', $product);
+        } catch (AuthorizationException $e) {
+            return back()->with('error', 'Você não pode adicionar seu próprio produto ao carrinho.');
+        }
 
         $order = Order::firstOrCreate([
             'user_id' => Auth::id(),
@@ -37,21 +45,22 @@ class OrderController extends Controller
 
         $item = $order->items()->where('product_id', $product->id)->first();
 
-        if(!$item) {
-            $order->items()->updateOrCreate(
-                ['product_id' => $product->id]
-                ,
-                [
+        if ($item) {
+            $item->quantity += $request->quantity;
+            $item->subtotal = $item->quantity * $item->price;
+            $item->save();
+        } else {
+            $order->items()->create([
+                'product_id'   => $product->id,
                 'product_name' => $product->name,
-                'seller_id' => $product->user->id,
-                'quantity' => 1,
-                'price' => $product->price,
-                'subtotal' => $product->price,
-                ]
-            );
+                'seller_id'    => $product->user_id,
+                'quantity'     => $request->quantity,
+                'price'        => $product->price,
+                'subtotal'     => $product->price * $request->quantity,
+            ]);
         }
 
-    return redirect()->back() ->with('success', 'Adicionado ao carrinho');
+        return redirect()->back()->with('success', 'Adicionado ao carrinho');
     }
 
     public function update(Request $request, OrderItem $item) : RedirectResponse
@@ -94,6 +103,19 @@ class OrderController extends Controller
         $item->delete();
 
         return redirect()->route('cart.index')->with('success', 'Item removido do carrinho.');
+    }
+
+
+    public function myOrders(): View
+    {
+         $orders = Auth::user()
+            ->orders()
+            ->with('items.product') // eager loading
+            ->where('status', 'pending')
+            ->latest()
+            ->paginate(10);
+
+        return view('user_orders', compact('orders'));
     }
 
 

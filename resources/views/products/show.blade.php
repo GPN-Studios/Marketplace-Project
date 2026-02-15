@@ -77,7 +77,7 @@
 
                 <div class="pix">no Pix</div>
 
-                <form action="{{ route('cart.add', encrypt($product->id)) }}" method="POST">
+                <form action="{{ route('cart.add', $product) }}" method="POST">
                     @csrf
 
                     <div class="product-quantity">

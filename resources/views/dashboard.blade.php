@@ -6,25 +6,12 @@
 
 @section('content')
 
-{{-- HERO COM DEGRADE --}}
-<section class="hero-gradient">
-    <div class="hero-content">
-        <h1 class="hero-title">
-            Ofertas imperdíveis pra você
-        </h1>
-        <p class="hero-subtitle">
-            Produtos selecionados com o melhor preço e entrega rápida.
-        </p>
-    </div>
-</section>
+{{-- HERO COM BANNER CLICÁVEL --}}
+<a href="{{ route('tags.show', 'eletronicos') }}" class="hero-banner"></a>
 
 {{-- TAGS / CATEGORIAS --}}
 <section class="tag-boxes">
     <div class="tag-boxes-container">
-
-        <h2 class="tag-boxes-title">
-            Categorias
-        </h2>
 
         <div class="tag-boxes-grid">
             @foreach ($tags as $tag)
@@ -39,10 +26,6 @@
                         <img src="{{ asset('imgs/tags/' . $tag->slug . '.png') }}"
                              alt="{{ $tag->name }}">
                     </div>
-
-                    <span class="tag-box-action">
-                        Ver produtos →
-                    </span>
 
                 </a>
             @endforeach

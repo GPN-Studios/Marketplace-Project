@@ -14,40 +14,18 @@ body {
     color: var(--text-main);
 }
 
-.hero-gradient {
+.hero-banner {
+    display: block;
+    background-image: url('/imgs/blackfridaybanner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 420px;
     width: 100%;
-    min-height: 300px;
-    background: linear-gradient(
-        180deg,
-        #0A7F78 0%,
-        #2FAF9B 45%,
-        #F2F2F2 100%
-    );
-    display: flex;
-    align-items: center;
-}
-
-.hero-content {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 48px 16px;
-}
-
-.hero-title {
-    font-size: 36px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 12px;
-}
-
-.hero-subtitle {
-    font-size: 18px;
-    color: #fff;
-    max-width: 520px;
+    margin-bottom: 40px;
 }
 
 .tag-boxes {
-    margin-top: -25px;
+    margin-top: 0;
     padding-bottom: 32px;
 }
 
@@ -57,12 +35,6 @@ body {
     padding: 0 16px;
 }
 
-.tag-boxes-title {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
 .tag-boxes-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -70,16 +42,9 @@ body {
 }
 
 .tag-box {
-    background: #fff;
-    border: 1px solid var(--border-light);
-    border-radius: 6px;
-    padding: 12px;
-    min-height: 190px;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: var(--text-main);
-    transition: box-shadow .2s ease, border-color .2s ease;
+    position: relative;
+    background: transparent;
+    border: 2.5px solid var(--border-light);
 }
 
 .tag-box:hover {
@@ -87,50 +52,52 @@ body {
     box-shadow: var(--shadow-md);
 }
 
-.tag-box-name {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    text-align: center;
-}
-
 .tag-box-image {
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    background: #f9fafb;
-    border-radius: 6px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .tag-box-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    display: block;
 }
 
-.tag-box-action {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--primary);
+.tag-box-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,.55) 100%
+    );
+    z-index: 1;
+}
+
+.tag-box-name {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px 12px 10px;
     text-align: center;
-}
-
-.hero-gradient + .content {
-    padding-top: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 2;
+    line-height: 1.3;
+    pointer-events: none;
 }
 
 .content {
     max-width: 1740px;
     margin: 0 auto;
     padding: 32px 16px;
-}
-
-.tag-section:first-child {
-    margin-top: -25px;
 }
 
 .tag-title {
@@ -148,10 +115,10 @@ body {
 .product-card .card {
     min-height: 390px;
     background: #fff;
-    border-radius: 6px;
     border: 1px solid var(--border-light);
     overflow: hidden;
-    transition: box-shadow .2s ease, border-color .2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover .card {
@@ -162,15 +129,13 @@ body {
 .product-image-wrapper {
     height: 220px;
     background: #f9fafb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
 }
 
 .product-image-wrapper img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .card-body {
@@ -178,6 +143,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    flex: 1;
 }
 
 .card-title {
@@ -188,6 +154,7 @@ body {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: calc(1.35em * 3);
 }
 
 .product-card:hover .card-title {
@@ -196,6 +163,7 @@ body {
 
 .card-text {
     margin-top: auto;
+    font-family: 'Segoe UI Symbol', arial, sans-serif;
     font-size: 16px;
     font-weight: 700;
     color: var(--primary);
@@ -244,38 +212,24 @@ body {
 }
 
 @media (max-width: 1400px) {
-    .tag-boxes-grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
+    .tag-boxes-grid { grid-template-columns: repeat(6, 1fr); }
 }
 
 @media (max-width: 1200px) {
-    .tag-products {
-        grid-template-columns: repeat(5, 1fr);
-    }
+    .tag-products { grid-template-columns: repeat(5, 1fr); }
 }
 
 @media (max-width: 992px) {
     .tag-boxes-grid,
-    .tag-products {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    .tag-products { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (max-width: 768px) {
     .tag-boxes-grid,
-    .tag-products {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero-title {
-        font-size: 28px;
-    }
+    .tag-products { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
     .tag-boxes-grid,
-    .tag-products {
-        grid-template-columns: 1fr;
-    }
+    .tag-products { grid-template-columns: 1fr; }
 }

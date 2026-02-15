@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_adresses', function (Blueprint $table) {
+        Schema::create('order_addresses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
 
-            $table->string('cep', 9);
+            $table->string('recipient_name');
+            $table->string('cep', 8);
             $table->string('state', 2);
             $table->string('city');
             $table->string('district'); // bairro

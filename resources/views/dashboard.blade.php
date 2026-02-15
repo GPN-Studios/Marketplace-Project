@@ -46,7 +46,7 @@
 
     <div class="tag-products">
         @foreach ($tag->products as $product)
-        <a href="{{ route('products.show', encrypt($product->id)) }}"
+        <a href="{{ route('products.show', $product ) }}"
            class="product-card text-decoration-none text-reset">
 
             <div class="card">

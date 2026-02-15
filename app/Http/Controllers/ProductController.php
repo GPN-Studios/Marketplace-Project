@@ -38,13 +38,9 @@ class ProductController extends Controller
         return back()->with('success', 'Produto criado com sucesso.');
     }
 
-    public function show(string $id): View
+    public function show(Product $product): View
     {
         $tags = Tag::all();
-
-        $productId = decrypt($id);
-
-        $product = Product::findOrFail($productId);
 
         $product->load('user');
 

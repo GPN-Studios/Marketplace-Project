@@ -52,7 +52,7 @@ class StripeWebhookController extends Controller
             return response()->json(['error' => 'missing order_id'], 400);
         }
 
-        $order = Order::find($orderId);
+        $order = Order::with('items.seller')->find($orderId);
 
         if (!$order) {
             return response()->json([
@@ -78,18 +78,24 @@ class StripeWebhookController extends Controller
 
             foreach($order->items as $item) {
                 $item->seller->increment('balance', $item->subtotal);
-
-                $order->update([
-                    'status' => 'paid',
-                    'stripe_session_id' => $session->id,
-                ]);
             }
+
+            $order->update([
+                'status' => 'paid',
+                'stripe_session_id' => $session->id,
+            ]);
         });
+
+        \Log::info('Stripe webhook processed', [
+            'order_id' => $order->id,
+            'total' => $order->items->sum('subtotal'),
+            'session_id' => $session->id,
+        ]);
 
 
         return response()->json([
             'status' => '200',
             'message' => 'success'
-            ],200);   
+        ],200);   
     }
 }

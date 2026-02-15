@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
 
 // ================= Stripe ====================
 
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
+Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle']);
 
 Route::post('/orders/{order}/checkout', [StripeController::class, 'checkout'])->name('orders.checkout')->middleware('auth');
 

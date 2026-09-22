@@ -36,8 +36,6 @@
         <div class="col-lg-4">
             <h1 class="product-title">{{ $product->name }}</h1>
 
-            <div class="rating">⭐ 4.8 <span>(1574 avaliações)</span></div>
-
             <div class="stock">
                 Estoque disponível: {{ $product->stock }}
             </div>
@@ -47,6 +45,9 @@
                 <a href="{{ route('profile', $product->user->id) }}" class="seller-link">
                     <strong>{{ $product->user->name }}</strong>
                 </a>
+                <span class="seller-reputation">
+                    ({{ $sellerPositiveRatings }} 👍 / {{ $sellerNegativeRatings }} 👎)
+                </span>
             </div>
 
             {{-- TAGS --}}
@@ -69,40 +70,38 @@
             {{-- CAIXA DE COMPRA --}}
             <div class="buy-box">
 
-                <div class="old-price">R$ 2.657,40</div>
-
                 <div class="price">
-                    R$ {{ number_format($product->price, 2, ',', '.') }}
+                    {{ config('shop.currency_symbol') }} {{ $product->price_formatted }}
                 </div>
 
                 <div class="pix">no Pix</div>
 
-                <form action="{{ route('cart.add', $product) }}" method="POST">
-                    @csrf
+                @if ($product->stock > 0)
+                    <form action="{{ route('cart.add', $product) }}" method="POST">
+                        @csrf
 
-                    <div class="product-quantity">
-                        <div class="quantity-header">
-                            <label for="quantity">Quantidade</label>
-                            <span class="available-stock">
-                                Disponível: {{ $product->stock }}
-                            </span>
+                        <div class="product-quantity">
+                            <div class="quantity-header">
+                                <label for="quantity">Quantidade</label>
+                                <span class="available-stock">
+                                    Disponível: {{ $product->stock }}
+                                </span>
+                            </div>
+
+                            <select name="quantity" id="quantity">
+                                @for ($i = 1; $i <= min(10, $product->stock); $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
                         </div>
 
-                        <select name="quantity" id="quantity">
-                            @for ($i = 1; $i <= min(10, $product->stock); $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </div>
-
-                    <button class="btn btn-success w-100 mb-2">
-                        Adicionar ao carrinho
-                    </button>
-
-                    <button class="btn btn-outline-primary w-100">
-                        Comprar agora
-                    </button>
-                </form>
+                        <button class="btn btn-success w-100">
+                            Adicionar ao carrinho
+                        </button>
+                    </form>
+                @else
+                    <div class="text-muted text-center py-2">Produto esgotado</div>
+                @endif
             </div>
 
             {{-- BOTÕES EDITAR / EXCLUIR (FORA DA CAIXA) --}}

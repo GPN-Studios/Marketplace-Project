@@ -105,13 +105,16 @@
                     <h3 class="card-title">Preço</h3>
 
                     <div class="price-box">
-                        <span class="currency">R$</span>
+                        <span class="currency">{{ config('shop.currency_symbol') }}</span>
                         <input
                             type="text"
                             class="form-control price-input"
-                            name="price"
-                            value="{{ old('price', $product->price) }}"
+                            placeholder="0,00"
+                            value="{{ old('price', $product->price_formatted) }}"
+                            id="priceInput"
+                            data-locale="{{ str_replace('_', '-', app()->getLocale()) }}"
                         >
+                        <input type="hidden" name="price" id="priceHidden" value="{{ old('price', $product->price) }}">
                     </div>
 
                     @error('price')
@@ -138,4 +141,7 @@
 
 @endauth
 
+@endsection
+@section('scripts')
+<script src="{{ asset('js/price-mask.js') }}"></script>
 @endsection

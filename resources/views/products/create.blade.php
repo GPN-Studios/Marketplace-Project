@@ -123,13 +123,14 @@
                     <h3 class="card-title">Preço</h3>
 
                     <div class="price-box">
-                        <span class="currency">R$</span>
+                        <span class="currency">{{ config('shop.currency_symbol') }}</span>
                         <input
                             type="text"
                             class="form-control price-input"
                             placeholder="0,00"
                             value="{{ old('price') }}"
                             id="priceInput"
+                            data-locale="{{ str_replace('_', '-', app()->getLocale()) }}"
                         >
                     <input type="hidden" name="price" id="priceHidden">
                     </div>
@@ -161,5 +162,5 @@
 
 @endsection
 @section('scripts')
-<script src="{{ asset('js/create.js') }}"></script>
+<script src="{{ asset('js/price-mask.js') }}"></script>
 @endsection

@@ -10,9 +10,16 @@ class Rating extends Model
         'order_item_id',
         'buyer_id',
         'seller_id',
-        'rating',
-        'comment',
+        'is_positive',
+        'description',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_positive' => 'boolean',
+        ];
+    }
 
     // Relations
     public function orderItem()
@@ -29,5 +36,4 @@ class Rating extends Model
     {
         return $this->belongsTo(User::class, 'seller_id');
     }
-
 }

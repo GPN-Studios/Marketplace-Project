@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RatingController extends Controller
 {
-    public function store(Request $request, OrderItem $orderItem) : RedirectResponse
+    public function store(Request $request, OrderItem $orderItem): RedirectResponse
     {
-        $this->authorize('create', $orderItem);
+        $this->authorize('rate', $orderItem);
 
         $validated = $request->validate([
             'is_positive' => ['required', 'boolean'],
@@ -20,10 +20,10 @@ class RatingController extends Controller
 
         Rating::create([
             'order_item_id' => $orderItem->id,
-            'buyer_id'      => auth()->id(),
-            'seller_id'     => $orderItem->product->user_id,
-            'is_positive'   => $validated['is_positive'],
-            'description'  => $validated['description'] ?? null,
+            'buyer_id' => auth()->id(),
+            'seller_id' => $orderItem->product->user_id,
+            'is_positive' => $validated['is_positive'],
+            'description' => $validated['description'] ?? null,
         ]);
 
         return back()->with('success', 'Avaliação enviada com sucesso!');

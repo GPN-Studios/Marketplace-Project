@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id') //comprador
+            $table->foreignId('user_id') // comprador
                 ->constrained()
                 ->restrictOnDelete();
-            
-            $table->integer('total')->default(0);   //somatorio do preço de todos os produtos
+
+            $table->integer('total')->default(0);   // somatorio do preço de todos os produtos
             $table->string('status')->default('cart'); // pending, paid, shipped, cart...
-            
+
             $table->timestamps();
         });
     }

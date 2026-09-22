@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Stripe\Webhook;
 use Stripe\Exception\SignatureVerificationException;
+use Stripe\Webhook;
 use UnexpectedValueException;
 
 class StripeWebhookController extends Controller
@@ -44,7 +43,7 @@ class StripeWebhookController extends Controller
 
         $orderId = $session->metadata->order_id;
 
-        if(!$orderId) {
+        if (! $orderId) {
             \Log::warning('Stripe webhook without order_id', [
                 'session_id' => $session->id,
             ]);
@@ -54,7 +53,7 @@ class StripeWebhookController extends Controller
 
         $order = Order::with('items.seller')->find($orderId);
 
-        if (!$order) {
+        if (! $order) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'order not found',
@@ -62,7 +61,7 @@ class StripeWebhookController extends Controller
             ], 404);
         }
 
-        if ($order->status === 'paid') {
+        if ($order->status === OrderStatus::Paid) {
             return response()->json(['already_processed' => true]);
         }
 
@@ -70,19 +69,24 @@ class StripeWebhookController extends Controller
             return response()->json(['ignored' => true]);
         }
 
-        DB::transaction(function() use ($order, $session)  {
+        DB::transaction(function () use ($order, $session) {
 
-            if ($order->status === 'paid') {
+            // trava a linha do pedido: se dois webhooks chegarem em paralelo
+            // para o mesmo pedido, só o primeiro credita o saldo.
+            $order = Order::whereKey($order->id)->lockForUpdate()->first();
+
+            if ($order->status === OrderStatus::Paid) {
                 return;
             }
 
-            foreach($order->items as $item) {
+            foreach ($order->items as $item) {
                 $item->seller->increment('balance', $item->subtotal);
             }
 
             $order->update([
-                'status' => 'paid',
+                'status' => OrderStatus::Paid,
                 'stripe_session_id' => $session->id,
+                'checkout_expires_at' => null,
             ]);
         });
 
@@ -92,10 +96,9 @@ class StripeWebhookController extends Controller
             'session_id' => $session->id,
         ]);
 
-
         return response()->json([
             'status' => '200',
-            'message' => 'success'
-        ],200);   
+            'message' => 'success',
+        ], 200);
     }
 }

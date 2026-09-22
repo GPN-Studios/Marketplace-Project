@@ -2,32 +2,49 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\OrderItem;
-use App\Models\OrderAddress;
-
 
 class Order extends Model
 {
-
     protected $fillable = [
-        'user_id', 
+        'user_id',
         'total',  // soma de todos os produtos somados
         'status',
+        'checkout_expires_at',
+        'stripe_session_id',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'status' => OrderStatus::class,
+            'checkout_expires_at' => 'datetime',
+        ];
+    }
 
-    //Relations
-    public function user() {
+    /** Total do pedido, em centavos, formatado como "129,90". */
+    protected function totalFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => format_money($this->total),
+        );
+    }
+
+    // Relations
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function adress() {
+    public function address()
+    {
         return $this->hasOne(OrderAddress::class);
     }
 }

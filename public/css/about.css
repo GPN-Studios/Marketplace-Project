@@ -1,0 +1,346 @@
+:root {
+    --about-primary: #2FAF9B;
+    --about-primary-dark: #0A7F78;
+    --about-bg: #F2F2F2;
+    --about-text: #374151;
+    --about-muted: #6b7280;
+    --about-border: #e5e7eb;
+    --about-shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
+    --about-shadow-md: 0 8px 24px rgba(0, 0, 0, .10);
+}
+
+body {
+    background-color: var(--about-bg);
+}
+
+/*
+   HERO
+*/
+.about-hero {
+    background: linear-gradient(135deg, #2FAF9B, #0A7F78);
+    color: #ffffff;
+    padding: 90px 24px 100px;
+    text-align: center;
+}
+
+.about-hero-container {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.about-eyebrow {
+    display: inline-block;
+    background: rgba(255, 255, 255, .18);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.about-hero h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.about-hero p {
+    font-size: 17px;
+    color: rgba(255, 255, 255, .92);
+    margin-bottom: 28px;
+}
+
+.about-hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+/*
+   ESTATÍSTICAS (cartão sobreposto à borda inferior do hero)
+*/
+.about-stats {
+    max-width: 1100px;
+    margin: -56px auto 0;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+
+.about-stats-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--about-shadow-md);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 28px 12px;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    border-right: 1px solid var(--about-border);
+}
+
+.stat-card:last-child {
+    border-right: none;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--about-primary-dark);
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--about-muted);
+}
+
+/*
+   SEÇÕES
+*/
+.about-section {
+    padding: 72px 24px;
+}
+
+.about-section--muted {
+    background: #ffffff;
+}
+
+.about-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--about-muted);
+    margin-bottom: 40px;
+}
+
+/*
+   VALORES
+*/
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.value-card {
+    background: #ffffff;
+    border: 1px solid var(--about-border);
+    border-radius: 14px;
+    padding: 26px 22px;
+    text-align: left;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--about-shadow-md);
+    border-color: var(--about-primary);
+}
+
+.value-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #E3F5F2;
+    color: var(--about-primary-dark);
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+.value-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.value-card p {
+    font-size: 14px;
+    color: var(--about-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/*
+   COMO FUNCIONA
+*/
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.step-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px 24px;
+    box-shadow: var(--about-shadow-sm);
+    text-align: center;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #2FAF9B, #0A7F78);
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.step-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.step-card p {
+    font-size: 14px;
+    color: var(--about-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/*
+   EQUIPE
+*/
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: #ffffff;
+    border: 1px solid var(--about-border);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--about-shadow-md);
+}
+
+.team-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #2FAF9B, #0A7F78);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.team-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.team-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.team-links a {
+    color: var(--about-muted);
+    font-size: 18px;
+    transition: color .15s ease;
+}
+
+.team-links a:hover {
+    color: var(--about-primary-dark);
+}
+
+/*
+   CTA FINAL
+*/
+.about-cta {
+    background: linear-gradient(135deg, #0A7F78, #2FAF9B);
+    color: #ffffff;
+    text-align: center;
+    padding: 64px 24px;
+}
+
+.about-cta h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.about-cta p {
+    color: rgba(255, 255, 255, .9);
+    margin-bottom: 24px;
+}
+
+/*
+   RESPONSIVIDADE
+*/
+@media (max-width: 992px) {
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-stats-container { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+    .stat-card:nth-child(2) { border-right: none; }
+}
+
+@media (max-width: 600px) {
+    .about-hero { padding: 70px 20px 90px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .about-stats-container { grid-template-columns: 1fr; }
+
+    .stat-card {
+        border-right: none !important;
+        border-bottom: 1px solid var(--about-border);
+        padding-bottom: 16px;
+    }
+
+    .stat-card:last-child {
+        border-bottom: none;
+    }
+
+    .about-section {
+        padding: 48px 20px;
+    }
+}

@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\OrderStatus;
+use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Product;
-use App\Models\Order;
-use App\Models\Rating;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_picture',
+        'balance',
     ];
 
     /**
@@ -50,6 +51,14 @@ class User extends Authenticatable
         ];
     }
 
+    /** Saldo disponível, em centavos, formatado como "129,90". */
+    protected function balanceFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => format_money($this->balance),
+        );
+    }
+
     // Relations
 
     public function products()
@@ -64,7 +73,7 @@ class User extends Authenticatable
 
     public function cart()
     {
-        return $this->hasOne(Order::class)->where('status', 'cart');
+        return $this->hasOne(Order::class)->where('status', OrderStatus::Cart);
     }
 
     public function ratingsReceived()
@@ -78,6 +87,15 @@ class User extends Authenticatable
         return $this->hasMany(Rating::class, 'buyer_id');
     }
 
+    // Reputação (calculada a partir das avaliações recebidas como vendedor)
 
+    public function positiveRatingsCount(): int
+    {
+        return $this->ratingsReceived()->where('is_positive', true)->count();
+    }
 
+    public function negativeRatingsCount(): int
+    {
+        return $this->ratingsReceived()->where('is_positive', false)->count();
+    }
 }

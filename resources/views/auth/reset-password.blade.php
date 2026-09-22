@@ -1,6 +1,6 @@
 @extends('layouts.guest_layout')
 
-@section('title', 'Entrar')
+@section('title', 'Redefinir senha')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
@@ -15,23 +15,19 @@
         </a>
 
         <div class="login-box">
-            <h2>Bem-vindo de volta</h2>
-            <p class="auth-subtitle">Entre na sua conta para continuar</p>
+            <h2>Redefinir senha</h2>
+            <p class="auth-subtitle">Escolha uma nova senha para sua conta</p>
 
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('password.update') }}">
                 @csrf
+
+                <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                 <div class="input-group">
                     <label for="email">E-mail</label>
                     <div class="input-icon-group">
                         <i class="fa-solid fa-envelope field-icon"></i>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="username" autofocus required>
+                        <input type="email" name="email" id="email" value="{{ old('email', $request->email) }}" autocomplete="username" autofocus required>
                     </div>
                     <div class="error-box">
                         @error('email')
@@ -41,10 +37,10 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="password">Senha</label>
+                    <label for="password">Nova senha</label>
                     <div class="input-icon-group has-toggle">
                         <i class="fa-solid fa-lock field-icon"></i>
-                        <input type="password" name="password" id="password" autocomplete="current-password" required>
+                        <input type="password" name="password" id="password" autocomplete="new-password" required>
                         <button type="button" class="password-toggle" data-target="password" aria-label="Mostrar senha">
                             <i class="fa-solid fa-eye"></i>
                         </button>
@@ -56,26 +52,20 @@
                     </div>
                 </div>
 
-                <div class="form-options-row">
-                    <label class="remember-check">
-                        <input type="checkbox" name="remember">
-                        Lembrar de mim
-                    </label>
-
-                    <a href="{{ route('password.request') }}">Esqueceu a senha?</a>
+                <div class="input-group">
+                    <label for="password_confirmation">Confirmar nova senha</label>
+                    <div class="input-icon-group has-toggle">
+                        <i class="fa-solid fa-lock field-icon"></i>
+                        <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" required>
+                        <button type="button" class="password-toggle" data-target="password_confirmation" aria-label="Mostrar senha">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <button class="btn-primary" type="submit">
-                    Entrar
+                    Redefinir senha
                 </button>
-
-                <div class="divider">
-                    <span>ou</span>
-                </div>
-
-                <a href="{{ route('signup') }}" class="btn-secondary">
-                    Criar uma conta
-                </a>
             </form>
         </div>
 

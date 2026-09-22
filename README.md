@@ -1,59 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Marketplace Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Marketplace de produtos construído em Laravel: navegação por categoria, carrinho,
+checkout com pagamento via Stripe, confirmação de entrega e avaliações — com
+autorização consistente em todas as ações sensíveis e cobertura de testes
+automatizados.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Catálogo e categorias** — produtos organizados por tags (categorias),
+  com página de categoria, busca e carrossel na home.
+- **Carrinho e checkout** — adicionar/atualizar/remover itens, checkout via
+  [Stripe](https://stripe.com), confirmação de entrega e cancelamento, com
+  estorno automático de estoque quando o pedido é cancelado ou expira.
+- **Máquina de estados de pedido** tipada (`App\Enums\OrderStatus`):
+  `cart → pending → paid → completed`, ou `cancelled`.
+- **Avaliações** de produtos por item de pedido, com autorização própria
+  (`OrderItemPolicy`).
+- **Saldo e saque** do vendedor, creditado apenas após confirmação real de
+  pagamento.
+- **Autenticação** via [Laravel Fortify](https://laravel.com/docs/fortify):
+  cadastro, login, verificação de e-mail e redefinição de senha.
+- **Rate limiting** em toda a aplicação (carrinho, checkout, saque,
+  avaliações, anúncios, perfil, busca, login, cadastro, reset de senha) mais
+  um limite global como rede de segurança.
+- **Comando agendado** (`orders:expire-stale`) que cancela pedidos pendentes
+  expirados e repõe o estoque reservado.
+- **Páginas de erro customizadas** (403, 404, 419, 429, 500, 4xx, 5xx).
+- **Sem pipeline de build** — front-end em CSS/JS estático, sem Vite/npm.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2+ / [Laravel 12](https://laravel.com/docs/12.x)
+- [Laravel Fortify](https://laravel.com/docs/fortify) (autenticação)
+- [Stripe](https://stripe.com) (pagamentos)
+- [Resend](https://resend.com) (envio de e-mail em produção)
+- [spatie/laravel-tags](https://github.com/spatie/laravel-tags) (categorias)
+- MySQL
+- [Pest](https://pestphp.com) (testes)
 
-## Learning Laravel
+## Instalação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Pré-requisitos: PHP 8.2+, Composer e um banco MySQL.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+composer install
+composer run setup
+```
 
-## Laravel Sponsors
+O comando `setup` copia o `.env.example` para `.env`, gera a `APP_KEY`, cria
+o link de storage e roda as migrations. Depois, ajuste as variáveis no `.env`
+(ao menos `DB_*` e, para pagamentos, `STRIPE_KEY` / `STRIPE_SECRET` /
+`STRIPE_WEBHOOK_SECRET` — veja `.env.example` para a lista completa,
+incluindo as opções de `config/shop.php`: moeda, expiração de checkout,
+upload de imagens, paginação e limites de rate limiting).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Para popular o catálogo com produtos de exemplo (160 produtos mockados em
+8 categorias):
 
-### Premium Partners
+```bash
+php artisan db:seed
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Rodando localmente
 
-## Contributing
+```bash
+composer run dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Isso sobe o servidor (`php artisan serve`) e o worker de fila
+(`php artisan queue:listen`) juntos. Sem servidor de fila, e-mails e outros
+jobs assíncronos não são processados.
 
-## Code of Conduct
+Para o webhook do Stripe funcionar localmente, use o
+[Stripe CLI](https://stripe.com/docs/stripe-cli) apontando para
+`/webhook/stripe`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Testes
 
-## Security Vulnerabilities
+```bash
+composer test
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+A suíte cobre carrinho (incluindo o IDOR corrigido), ciclo de vida de
+pedidos, atualização de produtos, avaliações, busca e rate limiting.
 
-## License
+## Documentação adicional
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [`AUDITORIA.md`](AUDITORIA.md) — auditoria técnica completa realizada
+  antes da v1.0.0.
+- [`CHANGELOG.md`](CHANGELOG.md) — histórico de mudanças por versão.
+
+## Licença
+
+Este projeto é distribuído sob a [licença MIT](LICENSE).

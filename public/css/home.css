@@ -106,10 +106,63 @@ body {
     margin-bottom: 20px;
 }
 
+.product-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .tag-products {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
     gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    touch-action: pan-y;
+    padding: 2px;
+}
+
+.tag-products::-webkit-scrollbar {
+    display: none;
+}
+
+.tag-products.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    user-select: none;
+}
+
+.carousel-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-light);
+    background: #fff;
+    color: var(--text-main);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    z-index: 3;
+}
+
+.carousel-btn:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.product-card {
+    flex: 0 0 auto;
+    width: 230px;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .product-card .card {
@@ -215,21 +268,22 @@ body {
     .tag-boxes-grid { grid-template-columns: repeat(6, 1fr); }
 }
 
-@media (max-width: 1200px) {
-    .tag-products { grid-template-columns: repeat(5, 1fr); }
-}
-
 @media (max-width: 992px) {
-    .tag-boxes-grid,
-    .tag-products { grid-template-columns: repeat(4, 1fr); }
+    .tag-boxes-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .product-card { width: 200px; }
 }
 
 @media (max-width: 768px) {
-    .tag-boxes-grid,
-    .tag-products { grid-template-columns: repeat(2, 1fr); }
+    .tag-boxes-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .product-card { width: 170px; }
+
+    .carousel-btn { width: 34px; height: 34px; }
 }
 
 @media (max-width: 480px) {
-    .tag-boxes-grid,
-    .tag-products { grid-template-columns: 1fr; }
+    .tag-boxes-grid { grid-template-columns: 1fr; }
+
+    .product-card { width: 150px; }
 }

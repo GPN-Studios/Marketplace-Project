@@ -62,6 +62,12 @@
     font-weight: 600;
 }
 
+.seller-reputation {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
 .tags {
     display: flex;
     flex-wrap: wrap;

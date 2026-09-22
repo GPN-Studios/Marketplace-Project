@@ -25,7 +25,7 @@
         <div class="footer-column">
             <h4>Contatos</h4>
             <ul>
-                <li>Email: renato.deacaldas@gmail.com</li>
+                <li>Email: {{ config('shop.support_email') }}</li>
                 <li>WhatsApp: (21) 99962-5191</li>
             </ul>
         </div>

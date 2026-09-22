@@ -29,7 +29,7 @@
 
                     <div class="product-meta">
                         <span class="price">
-                            R$ {{ number_format($product->price, 2, ',', '.') }}
+                            {{ config('shop.currency_symbol') }} {{ $product->price_formatted }}
                         </span>
 
                         <span class="stock">

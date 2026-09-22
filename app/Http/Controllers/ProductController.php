@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Spatie\Tags\Tag;
 
 class ProductController extends Controller
@@ -23,6 +23,8 @@ class ProductController extends Controller
 
     public function edit(Product $product): View
     {
+        $this->authorize('update', $product);
+
         return view('products.edit', compact('product'));
     }
 
@@ -30,7 +32,7 @@ class ProductController extends Controller
     {
         $product = Product::create($request->safe()->merge([
             'image' => $request->file('image')->store('products', 'public'),
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ])->except('tags'));
 
         $product->syncTags($request->tags);
@@ -40,23 +42,36 @@ class ProductController extends Controller
 
     public function show(Product $product): View
     {
-        $tags = Tag::all();
+        $product->load(['user', 'tags']);
 
-        $product->load('user');
-
-        return view('products.show', compact('product', 'tags'));
+        return view('products.show', [
+            'product' => $product,
+            'sellerPositiveRatings' => $product->user->positiveRatingsCount(),
+            'sellerNegativeRatings' => $product->user->negativeRatingsCount(),
+        ]);
     }
 
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
         $this->authorize('update', $product);
 
-        $product->update($request->validated());
+        $data = $request->safe()->except('image');
 
-        return redirect()->route('products.show', encrypt($product->id));
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        return redirect()->route('products.show', $product)->with('success', 'Produto atualizado com sucesso.');
     }
 
-    public function delete(Request $request, Product $product) {
+    public function delete(Request $request, Product $product)
+    {
 
         $this->authorize('delete', $product);
 

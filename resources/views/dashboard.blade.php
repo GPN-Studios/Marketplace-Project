@@ -44,33 +44,46 @@
 
     <h3 class="tag-title">{{ $tag->name }}</h3>
 
-    <div class="tag-products">
-        @foreach ($tag->products as $product)
-        <a href="{{ route('products.show', $product ) }}"
-           class="product-card text-decoration-none text-reset">
+    <div class="product-carousel">
 
-            <div class="card">
-                <div class="product-image-wrapper">
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="">
+        <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Produtos anteriores">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="tag-products">
+            @foreach ($tag->products as $product)
+            <a href="{{ route('products.show', $product ) }}"
+               class="product-card text-decoration-none text-reset"
+               draggable="false">
+
+                <div class="card">
+                    <div class="product-image-wrapper">
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="" draggable="false">
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-title">
+                            {{ $product->name }}
+                        </p>
+
+                        <p class="card-text">
+                            {{ config('shop.currency_symbol') }} {{ $product->price_formatted }}
+                        </p>
+
+                        <p class="seller-name">
+                            Criado por {{ $product->user->name }}
+                        </p>
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    <p class="card-title">
-                        {{ $product->name }}
-                    </p>
+            </a>
+            @endforeach
+        </div>
 
-                    <p class="card-text">
-                        R$ {{ number_format($product->price, 2, ',', '.') }}
-                    </p>
+        <button type="button" class="carousel-btn carousel-btn--next" aria-label="Próximos produtos">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
 
-                    <p class="seller-name">
-                        Criado por {{ $product->user->name }}
-                    </p>
-                </div>
-            </div>
-
-        </a>
-        @endforeach
     </div>
 
     <div class="tag-more">
@@ -86,4 +99,8 @@
 
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/product-carousel.js') }}"></script>
 @endsection

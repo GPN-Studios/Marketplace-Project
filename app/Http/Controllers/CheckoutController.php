@@ -2,107 +2,113 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\OrderStatus;
+use App\Http\Requests\StoreOrderAddressRequest;
 use App\Models\Order;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * --------------->  !!!!!! WARNING !!!!!!  <---------------  
- * This controller simulates checkout and cashout flows.
- * No real payment, transfer or financial transaction is performed.
- * Intended for study / personal project purposes only. 
-*/
-
+ * --------------->  !!!!!! AVISO !!!!!!  <---------------
+ * Este controller simula o fluxo de checkout e de saque de saldo.
+ * O pagamento real é processado pelo Stripe (StripeController +
+ * StripeWebhookController) — este controller nunca credita saldo
+ * sem que o webhook do Stripe tenha confirmado o pagamento antes.
+ * Projeto de estudo / uso pessoal.
+ */
 class CheckoutController extends Controller
 {
-    public function checkout(Order $order) : RedirectResponse
+    public function checkout(StoreOrderAddressRequest $request, Order $order): RedirectResponse
     {
         $this->authorize('checkout', $order);
 
-        // uses transactions incase anything fails
-        DB::transaction(function () use ($order) {
-            //use allows $order to be used inside the transaction
+        if ($order->items->isEmpty()) {
+            abort(400, 'Carrinho vazio.');
+        }
+
+        DB::transaction(function () use ($order, $request) {
             $total = 0;
 
             foreach ($order->items as $item) {
-
-                //product related to the current orderitem
+                // trava a linha do produto para evitar overselling em requisições concorrentes
                 $product = $item->product()->lockForUpdate()->first();
 
-                // user related to the current orderitem product
-                $seller  = $product->user;
-
-                //verify if product stock is enough
                 if ($product->stock < $item->quantity) {
-                    abort(400, 'Estoque insuficiente');
+                    abort(400, "Estoque insuficiente para \"{$product->name}\".");
                 }
 
-                //reduce product stock based on selected quantity
-                $product->stock -= $item->quantity;
-                $product->save();
+                $product->decrement('stock', $item->quantity);
 
-                // update the total price to pay
                 $total += $item->subtotal;
             }
 
-            // update order
-            $order->update([
-                'status' => 'pending',
-                'total'  => $total,
-            ]);
+            $order->address()->updateOrCreate([], $request->validated());
 
+            $order->update([
+                'status' => OrderStatus::Pending,
+                'total' => $total,
+                'checkout_expires_at' => now()->addMinutes((int) config('shop.checkout_expiration_minutes')),
+            ]);
         });
 
-        return redirect()->route('home');
+        return redirect()
+            ->route('user.orders')
+            ->with('success', 'Pedido criado! Finalize o pagamento abaixo para confirmar a compra.');
     }
 
-
+    // comprador confirma que recebeu os produtos — só alcançável depois que
+    // o webhook do Stripe já confirmou o pagamento (status 'paid'). O saldo
+    // do vendedor já foi creditado pelo webhook; aqui só fechamos o pedido.
     public function confirmDelivery(Order $order): RedirectResponse
     {
         $this->authorize('confirmDelivery', $order);
 
-        DB::transaction(function () use ($order) {
-
-            foreach ($order->items as $item) {
-                $seller = $item->product->user;
-                $seller->balance += $item->subtotal;
-                $seller->save();
-            }
-
-            $order->update([
-                'status' => 'completed',
-            ]);
-        });
+        $order->update(['status' => OrderStatus::Completed]);
 
         return back()->with('success', 'Entrega confirmada! Agora você pode avaliar os produtos.');
     }
 
-    /**
-     * DISCLAIMER:
-     * This code does NOT process real payments.
-     * All checkout and cashout logic is simulated for learning purposes.
-    */
-    public function withdraw(Request $request)
+    public function withdraw(Request $request): RedirectResponse
     {
         $user = $request->user();
-        abort_if($user->balance <= 0, 400, 'Saldo indisponível');
+        abort_if($user->balance <= 0, 400, 'Saldo indisponível.');
 
-        $user->update([
-            'balance' => 0,
-        ]);
+        $user->update(['balance' => 0]);
 
         return back()->with('success', 'Saque realizado com sucesso.');
     }
 
     public function success(Order $order)
     {
+        $this->authorize('view', $order);
+
+        $order->load('items.product');
+
         return view('checkout_success', compact('order'));
     }
 
     public function cancel(Order $order)
     {
+        $this->authorize('view', $order);
+
+        DB::transaction(function () use ($order) {
+            // idempotente: se o pedido já não estiver mais pendente (ex.: o
+            // pagamento foi confirmado em outra aba antes do usuário clicar
+            // em "cancelar"), não desfazemos nada.
+            if ($order->status !== OrderStatus::Pending) {
+                return;
+            }
+
+            foreach ($order->items as $item) {
+                $item->product()->increment('stock', $item->quantity);
+            }
+
+            $order->update(['status' => OrderStatus::Cancelled]);
+        });
+
+        $order->load('items.product');
+
         return view('checkout_cancel', compact('order'));
     }
-
 }

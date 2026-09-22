@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
         ]);
+
+        $this->call(TagSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

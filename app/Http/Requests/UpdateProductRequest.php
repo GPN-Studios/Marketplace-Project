@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -11,19 +12,21 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // A autorização real (dono do produto) é feita pela ProductPolicy
+        // dentro do ProductController::update().
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'name' => 'sometimes|string|min:5|max:255',
-            'image' => 'sometimes|image|max:2048',
+            'image' => image_upload_rules(required: false),
             'description' => 'sometimes|string|max:1000',
             'price' => 'sometimes|numeric|min:1',
             'stock' => 'sometimes|integer|min:1',

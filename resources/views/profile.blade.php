@@ -13,33 +13,43 @@
     <div class="container d-flex align-items-center gap-3 py-3">
 
         <!-- FOTO -->
-        <form action="{{ route('user.pfp.update', $user) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
+        @if ($isOwnProfile)
+            <form action="{{ route('user.pfp.update', $user) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
 
-            <label class="profile-avatar-wrapper">
-                <img
-                    src="{{ $user->profile_picture ? asset('storage/'.$user->profile_picture) : 'https://via.placeholder.com/160' }}"
-                    class="profile-avatar"
-                    alt="Foto de perfil"
-                >
+                <label class="profile-avatar-wrapper">
+                    @if ($user->profile_picture)
+                        <img src="{{ asset('storage/'.$user->profile_picture) }}" class="profile-avatar" alt="Foto de perfil">
+                    @else
+                        <div class="profile-avatar profile-avatar-fallback">{{ Str::upper(Str::substr($user->name, 0, 1)) }}</div>
+                    @endif
 
-                <div class="profile-avatar-overlay">
-                    <i class="bi bi-camera"></i>
-                    Alterar foto
-                </div>
+                    <div class="profile-avatar-overlay">
+                        <i class="fa-solid fa-camera"></i>
+                        Alterar foto
+                    </div>
 
-                <input type="file" name="profile_picture" hidden onchange="this.form.submit()">
-            </label>
-        </form>
+                    <input type="file" name="profile_picture" hidden onchange="this.form.submit()">
+                </label>
+            </form>
+        @else
+            @if ($user->profile_picture)
+                <img src="{{ asset('storage/'.$user->profile_picture) }}" class="profile-avatar" alt="Foto de perfil">
+            @else
+                <div class="profile-avatar profile-avatar-fallback">{{ Str::upper(Str::substr($user->name, 0, 1)) }}</div>
+            @endif
+        @endif
 
         <!-- NOME -->
         <div class="text-white profile-user-info">
             <h5 class="m-0">{{ $user->name }}</h5>
 
-            <button class="profile-edit-btn" onclick="toggleEdit(true)">
-                Editar perfil
-            </button>
+            @if ($isOwnProfile)
+                <button class="profile-edit-btn" onclick="toggleEdit(true)">
+                    Editar perfil
+                </button>
+            @endif
         </div>
     </div>
 </div>
@@ -55,6 +65,22 @@
                 <p><strong>Email:</strong> {{ $user->email }}</p>
                 <p><strong>Desde:</strong> {{ $user->created_at->format('d/m/Y') }}</p>
             </div>
+
+            @if ($isOwnProfile)
+                <div class="profile-card">
+                    <h6>Saldo</h6>
+                    <p class="mb-3">
+                        <strong>{{ config('shop.currency_symbol') }} {{ $user->balance_formatted }}</strong> disponíveis para saque
+                    </p>
+
+                    @if ($user->balance > 0)
+                        <form action="{{ route('withdraw') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn-site w-100">Sacar saldo</button>
+                        </form>
+                    @endif
+                </div>
+            @endif
         </aside>
 
         <!-- REPUTAÇÃO / PERFIL -->
@@ -68,12 +94,12 @@
                     <div class="row text-center mt-3">
                         <div class="col">
                             <div class="profile-reputation positive">
-                                581<br>Positivas
+                                {{ $positiveRatings }}<br>Positivas
                             </div>
                         </div>
                         <div class="col">
                             <div class="profile-reputation negative">
-                                20<br>Negativas
+                                {{ $negativeRatings }}<br>Negativas
                             </div>
                         </div>
                     </div>
@@ -81,6 +107,7 @@
 
             </div>
 
+            @if ($isOwnProfile)
             <!-- EDIÇÃO -->
             <div id="profile-edit" style="display: none;">
                 <div class="profile-card text-center mx-auto" style="max-width: 500px;">
@@ -116,6 +143,7 @@
                     </form>
                 </div>
             </div>
+            @endif
 
         </main>
     </div>
@@ -126,42 +154,48 @@
     <div class="profile-card">
         <h5>Últimas avaliações</h5>
 
-        <div class="profile-review positive">
-            <p>"Atendimento demorado demais"</p>
-            <div class="review-meta negative">Avaliação negativa</div>
-            <small>Recebida como <strong>vendedor</strong></small>
-        </div>
-
-        <div class="profile-review negative">
-            <p>"Comprei unranked mas veio platina"</p>
-            <div class="review-meta positive">Avaliação positiva</div>
-            <small>Recebida como <strong>vendedor</strong></small>
-        </div>
+        @forelse ($latestRatings as $rating)
+            <div class="profile-review {{ $rating->is_positive ? 'positive' : 'negative' }}">
+                <p>{{ $rating->description ?: 'Sem comentário.' }}</p>
+                <div class="review-meta {{ $rating->is_positive ? 'positive' : 'negative' }}">
+                    Avaliação {{ $rating->is_positive ? 'positiva' : 'negativa' }}
+                </div>
+                <small>
+                    Recebida como <strong>vendedor</strong>, de {{ $rating->buyer?->name ?? 'usuário removido' }}
+                </small>
+            </div>
+        @empty
+            <p class="text-muted mb-0">Este usuário ainda não recebeu avaliações.</p>
+        @endforelse
     </div>
 </div>
 
 <!-- MEUS ANÚNCIOS -->
+@if ($isOwnProfile)
 <div class="container mt-5 mb-5">
     <div class="orders-box">
         <h4>Meus Anúncios</h4>
 
         <div class="products-grid">
-            @foreach ($user->products as $product)
-                <a href="{{ route('products.show', encrypt($product->id)) }}" class="text-decoration-none">
+            @forelse ($user->products as $product)
+                <a href="{{ route('products.show', $product) }}" class="text-decoration-none">
                     <div class="order-card">
                         <img src="{{ asset('storage/' . $product->image) }}" alt="">
 
                         <h5>{{ $product->name }}</h5>
 
                         <span>
-                            R$ {{ number_format($product->price, 2, ',', '.') }}
+                            {{ config('shop.currency_symbol') }} {{ $product->price_formatted }}
                         </span>
                     </div>
                 </a>
-            @endforeach
+            @empty
+                <p class="text-muted mb-0">Você ainda não anunciou nenhum produto.</p>
+            @endforelse
         </div>
     </div>
 </div>
+@endif
 
 <script>
 function toggleEdit(edit) {

@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'webhook/stripe',
         ]);
+
+        // Rede de segurança geral contra flood/scraping básico, por cima dos
+        // limites mais específicos já aplicados rota a rota em routes/web.php.
+        $middleware->web(append: 'throttle:global');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -18,7 +18,7 @@ class OrderAddress extends Model
         'complement',
     ];
 
-    //Relations
+    // Relations
     public function order()
     {
         return $this->belongsTo(Order::class);

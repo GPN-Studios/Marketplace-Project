@@ -50,7 +50,16 @@ class ProductSeeder extends Seeder
             Tag::findOrCreate($tagName);
 
             foreach ($items as $item) {
-                if (Product::where('name', $item['name'])->exists()) {
+                $product = Product::where('name', $item['name'])->first();
+
+                if ($product) {
+                    // Reparo idempotente: se o produto já existe mas o arquivo de
+                    // imagem sumiu (ex.: volume de storage recriado), baixa de novo
+                    // em vez de deixar o card quebrado.
+                    if (! $product->image || ! Storage::disk('public')->exists($product->image)) {
+                        $product->update(['image' => $this->downloadImage($item['name'])]);
+                    }
+
                     continue;
                 }
 
